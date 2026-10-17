@@ -65,7 +65,7 @@ def inline(text):
     text = re.sub(r"&lt;(https?://[^&\s]+)&gt;",
                   lambda m: stash(_link(m.group(1), m.group(1))), text)
     text = re.sub(r"&lt;([^@&\s]+@[^&\s]+)&gt;",
-                  lambda m: stash('<a href="mailto:%s">%s</a>'
+                  lambda m: stash('<!--email_off--><a href="mailto:%s">%s</a><!--email_on-->'
                                   % (m.group(1), m.group(1))), text)
     return re.sub(r"\x00(\d+)\x00", lambda m: parts[int(m.group(1))], text)
 
@@ -79,6 +79,8 @@ def _link(href, label):
         return ('<a href="%s" target="_blank" rel="noopener noreferrer" '
                 'aria-label="%s (opens in a new tab)">%s</a>'
                 % (href, html.escape(bare, quote=True), label))
+    if href.startswith("mailto:"):
+        return '<!--email_off--><a href="%s">%s</a><!--email_on-->' % (href, label)
     return '<a href="%s">%s</a>' % (href, label)
 
 
