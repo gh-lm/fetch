@@ -629,7 +629,7 @@ h1 {
 /* The company number is the one accent in the sub-footer: brand yellow,
    linking to the Companies House record. */
 .sub-footer .company-number { color: var(--brand-yellow); text-decoration: none; }
-.sub-footer .company-number:hover { text-decoration: underline; color: var(--brand-yellow); }
+
 .sub-footer nav {
   display: flex;
   flex-wrap: wrap;
