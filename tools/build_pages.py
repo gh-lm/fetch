@@ -364,6 +364,16 @@ def main():
     for slug, title, desc, heading, lead, body in pages:
         (SITE / (slug + ".html")).write_text(
             page(slug, title, desc, heading, lead, body, head_tmpl, tail))
+    missing = page(
+        "404", "Page not found", "That page does not exist.", "Page not found",
+        "There is nothing at this address.",
+        '<p>The page may have moved, or the address may have a typing slip. '
+        'Try the <a href="/">home page</a>, the <a href="/docs">documentation</a> '
+        'or the <a href="/changelog">changelog</a>.</p>', head_tmpl, tail)
+    missing = re.sub(r'<link rel="canonical"[^>]*>\n', '', missing)
+    missing = missing.replace('<meta name="theme-color"',
+                              '<meta name="robots" content="noindex" />\n<meta name="theme-color"', 1)
+    (SITE / "404.html").write_text(missing)
     for page_file in sorted(SITE.glob("*.html")):
         put_strip(page_file)
     stamp_css()
