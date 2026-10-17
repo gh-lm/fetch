@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/gh-lm/fetch/releases"><img alt="Version 1.0.0" src="https://img.shields.io/badge/version-1.0.0-fbc711?style=flat-square&labelColor=1f2937"></a>
+  <a href="https://github.com/gh-lm/fetch/releases"><img alt="Version 1.1.0" src="https://img.shields.io/badge/version-1.1.0-fbc711?style=flat-square&labelColor=1f2937"></a>
   <a href="LICENSE"><img alt="Licence GPL-3.0-or-later" src="https://img.shields.io/badge/licence-GPL--3.0--or--later-3b82f6?style=flat-square&labelColor=1f2937"></a>
   <a href="https://github.com/gh-lm/fetch/releases/latest"><img alt="Published as an AppImage" src="https://img.shields.io/badge/published-AppImage-22c55e?style=flat-square&labelColor=1f2937"></a>
   <img alt="Telemetry: none" src="https://img.shields.io/badge/telemetry-none-a855f7?style=flat-square&labelColor=1f2937">
