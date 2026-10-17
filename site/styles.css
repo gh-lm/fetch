@@ -619,15 +619,14 @@ h1 {
 .sub-footer .wrap {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 12px 32px;
 }
 .sub-footer p { margin: 0; line-height: 1.9; }
 .sub-footer a { color: var(--ink-dim); }
 .sub-footer a:hover { color: var(--ink); }
-/* The company number is the one accent in the sub-footer: brand yellow,
-   linking to the Companies House record. */
+/* The company number is the one accent in the sub-footer: brand yellow. */
 .sub-footer .company-number { color: var(--brand-yellow); text-decoration: none; }
 
 .sub-footer nav {
@@ -640,7 +639,8 @@ h1 {
 .sub-footer nav a {
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
+  min-height: 24px;
+  line-height: 1.9;
   text-decoration: none;
 }
 
