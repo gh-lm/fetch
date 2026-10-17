@@ -1,0 +1,15 @@
+# Addresses that used to live on other hosts, or on earlier versions of this
+# site. Permanent, because the old homes have gone for good.
+/code                                        /source        301
+/code/*                                      /source        301
+/blog                                        /              301
+/community                                   /              301
+/bugs                                        /accessibility 301
+/downloads                                   /              301
+/license                                     /licence       301
+/whats-new                                   /changelog     301
+
+# The download button and the app's own address for the newest build are
+# forwarded to the newest AppImage on GitHub, so a release never means
+# editing the site.
+/download/latest/Fetch-Terminal.AppImage     https://github.com/gh-lm/fetch/releases/latest/download/Fetch-Terminal.AppImage  302

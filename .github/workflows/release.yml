@@ -1,0 +1,100 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - package.json
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to build/release (defaults to package.json version)'
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+
+      # Every value below that can be influenced by workflow input (the
+      # manual "version" dispatch input) or a prior step's output is passed
+      # through env: and read from the environment inside the script, never
+      # substituted directly into the run: block via ${{ }} — that
+      # substitution happens as plain text before the shell ever sees it,
+      # so an unquoted, unsanitized value there is a script-injection
+      # vector straight into a job that holds GITHUB_TOKEN.
+      - name: Read version
+        id: version
+        env:
+          INPUT_VERSION: ${{ github.event.inputs.version }}
+        run: |
+          if [ -n "$INPUT_VERSION" ]; then
+            echo "version=$INPUT_VERSION" >> "$GITHUB_OUTPUT"
+          else
+            echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check for an existing release
+        id: check
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          if gh release view "$VERSION" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create tag and release
+        if: steps.check.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          gh release create "$VERSION" \
+            --target "${{ github.sha }}" \
+            --title "$VERSION" \
+            --notes "Fetch Terminal $VERSION — download the AppImage below, make it executable, and run it."
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build AppImage
+        run: npx electron-builder --publish never
+
+      - name: Locate build artifacts
+        id: artifacts
+        run: |
+          appimage=$(find "$HOME/Downloads" dist -iname "*.AppImage" 2>/dev/null | head -n1)
+          yml=$(find dist -iname "latest-linux.yml" 2>/dev/null | head -n1)
+          echo "appimage=$appimage" >> "$GITHUB_OUTPUT"
+          echo "yml=$yml" >> "$GITHUB_OUTPUT"
+
+      # A second copy under a fixed, version-less name. The AppImage is
+      # ~116 MB, over GitHub's 100 MB per-file limit, so it can't be
+      # committed into the Pages site itself — but this name makes
+      # releases/latest/download/Fetch-Terminal.AppImage a permanent URL
+      # that always serves the newest build, so the site's download
+      # button never has to be edited for a release. The versioned copy
+      # stays: it's what latest-linux.yml points the auto-updater at.
+      - name: Attach build artifacts to release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.version.outputs.version }}
+          APPIMAGE: ${{ steps.artifacts.outputs.appimage }}
+          YML: ${{ steps.artifacts.outputs.yml }}
+        run: |
+          cp "$APPIMAGE" "$RUNNER_TEMP/Fetch-Terminal.AppImage"
+          gh release upload "$VERSION" "$APPIMAGE" "$YML" \
+            "$RUNNER_TEMP/Fetch-Terminal.AppImage" --clobber

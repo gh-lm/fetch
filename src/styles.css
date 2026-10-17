@@ -1,0 +1,1020 @@
+/* Fetch Terminal — Lightmorphic house theme, drawn entirely in local CSS/SVG
+   (no fonts, icons, or assets fetched over the network) so the app looks
+   and feels identical on any Linux desktop environment.
+
+   The app is dark only. The accent colour is the one thing that changes,
+   and applyAccent() in renderer.js writes it over the fallbacks below. */
+
+/* Geist, bundled locally (SIL OFL 1.1, see src/fonts/GEIST-LICENSE.txt) —
+   loaded from disk, never a CDN or Google Fonts, so the app never needs a
+   network connection beyond checking GitHub for updates. */
+@font-face {
+  font-family: 'Geist';
+  src: url('fonts/geist-sans/Geist-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('fonts/geist-sans/Geist-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist';
+  src: url('fonts/geist-sans/Geist-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('fonts/geist-mono/GeistMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('fonts/geist-mono/GeistMono-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ---- Color roles ----
+     Flat, solid tones throughout: no gradients, no glows, no glass.
+     These are the fallbacks; applyAccent() overwrites primary/tertiary
+     at runtime with the accent picked in the appearance panel. */
+  color-scheme: dark;
+  --bg: #0b0b10;
+  --surface: #131218;
+  --surface-2: #1d1a2a;
+  --surface-3: #201e31;
+  --surface-4: #211f34;
+  --surface-5: #242138;
+  --outline: #6a6970;
+  --outline-variant: #434249;
+  --on-surface: #ecebf5;
+  --on-surface-variant: #919098;
+  --primary: #b7a9ff;
+  --primary-on: #22195c;
+  --primary-container: #3a3070;
+  --tertiary: #ffb59d;
+  --error: #ffb4ab;
+  --error-container: rgba(255, 180, 171, 0.14);
+  /* Raw Lightmorphic palette hues, for fills and status dots only (never
+     text) — the same in both schemes by design. */
+  --success-fill: #4BAE4F;
+  --warning-fill: #FFC006;
+  --info-fill: #2295F1;
+  --danger-fill: #F34236;
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 26px;
+  --elevation-1: 0 1px 2px rgba(0, 0, 0, 0.35), 0 1px 3px 1px rgba(0, 0, 0, 0.2);
+  --elevation-2: 0 2px 6px rgba(0, 0, 0, 0.4), 0 4px 10px rgba(0, 0, 0, 0.25);
+  --elevation-3: 0 4px 14px rgba(0, 0, 0, 0.5), 0 8px 22px rgba(0, 0, 0, 0.3);
+  --titlebar-height: 40px;
+  --motion-fast: 120ms cubic-bezier(0.2, 0, 0, 1);
+  --motion-med: 220ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+* { box-sizing: border-box; }
+
+/* Rounded window corners need real, per-pixel OS window transparency,
+   which on Linux only exists if a compositing window manager is actually
+   running — and across the range of desktops this app targets (Mint's
+   Cinnamon/Xfce/MATE spins among them), that's often off or unavailable.
+   Without it, a "transparent" window still comes back fully opaque and
+   square no matter what CSS says, so the rounded outline just draws over
+   a square backdrop rather than actually clipping it — worse than a
+   plain square window, since now it looks broken instead of just square.
+   Keeping this window plain and square avoids that entirely, everywhere. */
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--on-surface);
+  font-family: 'Geist', 'Roboto', 'Ubuntu', 'Cantarell', 'Noto Sans', system-ui, sans-serif;
+  font-size: 13px;
+  user-select: none;
+  transition: background var(--motion-med), color var(--motion-med);
+}
+
+/* frame:false means there's no OS-drawn window border, so without this the
+   whole app edge is invisible against a similarly-dark desktop/wallpaper —
+   a plain outline using the same subtle color as every other border in
+   the app (sidebar, titlebar, etc). position:relative makes body the
+   containing block for #main's position:absolute below, so #main insets
+   itself inside this border automatically instead of covering it.
+   border-radius: 0 keeps this genuinely square — the window is plain
+   and opaque (see the BrowserWindow config in main.js for why), so
+   nothing here should ever imply a rounded edge. */
+body {
+  position: relative;
+  border: 2px solid var(--outline-variant);
+  border-radius: 0;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+svg { display: block; width: 16px; height: 16px; }
+
+input, textarea {
+  font-family: inherit;
+  color: var(--on-surface);
+  background: var(--surface-2);
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-sm);
+  padding: 7px 10px;
+  transition: border-color var(--motion-fast), box-shadow var(--motion-fast);
+}
+
+/* Keyboard focus is always visible, on every control, in the accent. Mouse
+   clicks don't trigger it (:focus-visible), so nothing flashes on click. */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+/* Text fields already show focus with their own border + ring below. */
+input:focus-visible, textarea:focus-visible { outline: none; }
+input:focus, textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 22%, transparent);
+}
+
+/* ---------- Titlebar ---------- */
+
+#titlebar {
+  height: var(--titlebar-height);
+  display: flex;
+  align-items: stretch;
+  background: var(--surface);
+  border-bottom: 1px solid var(--outline-variant);
+}
+
+/* The sidebar's own header controls (toggle/search/lock) live up here,
+   flush with the top of the window, in their own column the same width
+   as the sidebar panel below — instead of a single titlebar strip that
+   the tabs seemed to float over the top of the sidebar. */
+#sidebar-topbar {
+  /* 260px sidebar width minus the toggle button's own footprint (30px
+     icon-btn + its 4px left/right margins), so the divider lines up
+     with the sidebar panel's right edge below. */
+  width: 222px;
+  flex: none;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 8px 0 0;
+  border-right: 1px solid var(--outline-variant);
+  transition: width var(--motion-med), padding var(--motion-med), border-color var(--motion-med);
+  -webkit-app-region: no-drag;
+}
+#sidebar-topbar.collapsed {
+  width: 0;
+  padding: 0;
+  border-right-color: transparent;
+}
+
+#terminal-topbar {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: stretch;
+  -webkit-app-region: drag;
+}
+
+.titlebar-drag { -webkit-app-region: drag; }
+.titlebar-drag.spacer { flex: 1; }
+
+.titlebar-btn {
+  margin: 5px 4px;
+  -webkit-app-region: no-drag;
+}
+
+.titlebar-popover-anchor {
+  position: relative;
+  display: flex;
+  -webkit-app-region: no-drag;
+}
+
+.popover {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 25;
+}
+.popover.hidden { display: none; }
+.popover-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+.popover-panel {
+  position: relative;
+  z-index: 1;
+  margin-top: 6px;
+  width: 216px;
+  background: var(--surface-3);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-md);
+  box-shadow: var(--elevation-3);
+  padding: 12px;
+  animation: modal-in var(--motion-med);
+}
+.popover-title {
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--on-surface-variant);
+  margin-bottom: 10px;
+}
+#accent-swatches {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+.accent-swatch {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  transition: transform var(--motion-fast), border-color var(--motion-fast);
+}
+.accent-swatch:hover { transform: scale(1.1); }
+.accent-swatch.selected { border-color: var(--on-surface); }
+.accent-swatch svg { width: 14px; height: 14px; }
+
+.titlebar-brand {
+  display: flex;
+  align-items: center;
+  padding: 0 14px 0 4px;
+  white-space: nowrap;
+}
+.app-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+  color: var(--on-surface);
+}
+
+#tabbar {
+  display: flex;
+  align-items: center;
+  flex: 0 1 auto;
+  min-width: 0;
+  -webkit-app-region: no-drag;
+}
+
+#tabs {
+  display: flex;
+  align-items: stretch;
+  gap: 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  min-width: 0;
+}
+#tabs::-webkit-scrollbar { display: none; }
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+  height: calc(var(--titlebar-height) - 8px);
+  margin-top: 8px;
+  max-width: 180px;
+  min-width: 100px;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  background: transparent;
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  transition: background var(--motion-fast), color var(--motion-fast);
+  position: relative;
+}
+.tab:hover { background: var(--surface-2); }
+.tab.active {
+  background: var(--surface-3);
+  color: var(--on-surface);
+  font-weight: 500;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+.tab.active::after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  bottom: -1px;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: var(--primary);
+}
+.tab-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+  font-size: 12.5px;
+}
+.tab-close {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--on-surface-variant);
+  flex: none;
+  font-size: 13px;
+  line-height: 1;
+}
+.tab-close svg { width: 11px; height: 11px; }
+.tab-close:hover { background: var(--surface-4); color: var(--on-surface); }
+
+.icon-btn {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--on-surface-variant);
+  transition: background var(--motion-fast), color var(--motion-fast);
+  flex: none;
+}
+.icon-btn:hover { background: var(--surface-2); color: var(--on-surface); }
+.icon-btn:disabled { opacity: 0.35; cursor: default; }
+.icon-btn:disabled:hover { background: none; color: var(--on-surface-variant); }
+/* Accent-filled buttons carry the full accent color as the fill and the
+   icon glyph in the accent's computed text color — white on dark
+   accents, brand navy on light ones — never a tinted shade of the
+   accent itself. */
+.icon-btn.active {
+  color: var(--primary-on);
+  background: var(--primary);
+}
+.icon-btn.accent-icon-btn { color: var(--on-surface); }
+.icon-btn.accent-icon-btn:hover { color: var(--primary-on); background: var(--primary); }
+.icon-btn.filled-accent {
+  color: var(--primary-on);
+  background: var(--primary);
+}
+.icon-btn.filled-accent:hover { filter: brightness(1.08); }
+
+#new-tab-btn {
+  margin: 6px 6px 6px 2px;
+}
+
+#window-controls {
+  display: flex;
+  -webkit-app-region: no-drag;
+}
+.win-btn {
+  width: 46px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--on-surface-variant);
+  transition: background var(--motion-fast), color var(--motion-fast);
+}
+.win-btn svg { width: 13px; height: 13px; }
+.win-btn:hover { background: var(--surface-2); color: var(--on-surface); }
+.win-btn-close:hover { background: var(--danger-fill); color: #ffffff; }
+
+/* ---------- Main layout ---------- */
+
+#main {
+  position: absolute;
+  top: var(--titlebar-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+}
+
+#sidebar {
+  width: 260px;
+  flex: none;
+  background: var(--surface);
+  border-right: 1px solid var(--outline-variant);
+  display: flex;
+  flex-direction: column;
+  transition: margin-left var(--motion-med), box-shadow var(--motion-med);
+  z-index: 4;
+  box-shadow: var(--elevation-2);
+}
+#sidebar.collapsed {
+  margin-left: -260px;
+  box-shadow: none;
+}
+
+.search-field {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface-2);
+  border: 1px solid var(--outline);
+  border-radius: var(--radius-lg);
+  padding: 6px 12px;
+}
+.search-field input {
+  border: none;
+  background: none;
+  padding: 0;
+  flex: 1;
+  min-width: 0;
+  font-size: 12.5px;
+}
+.search-field input:focus { box-shadow: none; }
+.search-icon { display: flex; opacity: 0.7; }
+.search-icon svg { width: 14px; height: 14px; }
+
+#snippet-list {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 4px 8px;
+}
+
+.snippet-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 4px 3px 4px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1px;
+  cursor: pointer;
+  transition: background var(--motion-fast), transform var(--motion-fast);
+  position: relative;
+}
+.snippet-item:hover { background: var(--surface-2); }
+.snippet-item:active { transform: scale(0.98); background: var(--surface-3); }
+.snippet-item.dragging { opacity: 0.4; }
+.snippet-item.drag-over-top { box-shadow: inset 0 2px 0 var(--primary); }
+.snippet-item.drag-over-bottom { box-shadow: inset 0 -2px 0 var(--primary); }
+
+.snippet-grip {
+  flex: none;
+  width: 12px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--on-surface-variant);
+  opacity: 0;
+  cursor: grab;
+  transition: opacity var(--motion-fast);
+}
+.snippet-grip svg { width: 12px; height: 12px; }
+.snippet-item:hover .snippet-grip { opacity: 0.45; }
+.snippet-item.dragging .snippet-grip { cursor: grabbing; }
+
+.snippet-icon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary);
+  color: var(--primary-on);
+  font-size: 10.5px;
+}
+.snippet-icon.remote {
+  background: var(--tertiary);
+  color: var(--tertiary-on);
+}
+
+.snippet-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.snippet-name {
+  flex: none;
+  max-width: 45%;
+  font-size: 12px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.snippet-command {
+  flex: 1;
+  min-width: 0;
+  font-family: 'Geist Mono', 'Roboto Mono', 'DejaVu Sans Mono', monospace;
+  font-size: 11.5px;
+  font-weight: 400;
+  color: var(--on-surface-variant);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.snippet-item.unnamed .snippet-command { color: var(--on-surface); }
+
+.snippet-edit-btn {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--on-surface-variant);
+  font-size: 12px;
+  opacity: 0.45;
+  transition: opacity var(--motion-fast), background var(--motion-fast), color var(--motion-fast);
+}
+.snippet-edit-btn svg { width: 13px; height: 13px; }
+.snippet-item:hover .snippet-edit-btn,
+.credential-row:hover .snippet-edit-btn { opacity: 1; }
+.snippet-edit-btn:hover { background: var(--surface-4); color: var(--on-surface); opacity: 1; }
+
+.snippet-pin-btn {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--on-surface-variant);
+  opacity: 0.35;
+  transition: opacity var(--motion-fast), background var(--motion-fast), color var(--motion-fast);
+}
+.snippet-pin-btn svg { width: 13px; height: 13px; }
+.snippet-item:hover .snippet-pin-btn { opacity: 1; }
+.snippet-pin-btn:hover { background: var(--surface-4); color: var(--on-surface); opacity: 1; }
+/* A pinned snippet's pin stays visible (and accent-colored) even when
+   not hovered — otherwise there'd be no way to tell it's pinned without
+   mousing over every row. */
+.snippet-pin-btn.pinned {
+  color: var(--primary);
+  opacity: 1;
+}
+.snippet-pin-btn.pinned:hover { background: var(--primary-container); color: var(--primary); }
+
+.empty-state {
+  color: var(--on-surface-variant);
+  font-size: 12px;
+  text-align: center;
+  padding: 24px 12px;
+  line-height: 1.5;
+}
+
+#credential-section {
+  flex: none;
+  border-top: 1px solid var(--outline-variant);
+  padding: 6px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.credential-header-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-title {
+  flex: none;
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--on-surface-variant);
+}
+.credential-controls {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+}
+.credential-controls .icon-btn {
+  flex: none;
+  width: 22px;
+  height: 22px;
+}
+.credential-controls .icon-btn svg { width: 13px; height: 13px; }
+.vault-pin-input {
+  flex: 1;
+  min-width: 0;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--outline);
+  background: var(--surface-2);
+  font-size: 11px;
+}
+.vault-pin-input:focus { border-color: var(--primary); }
+#credential-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 130px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.credential-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 4px 5px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--motion-fast);
+}
+.credential-row:hover { background: var(--surface-2); }
+.credential-row:active { background: var(--surface-3); }
+.credential-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 12.5px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#credential-delete-btn.armed { background: var(--error); color: #ffffff; }
+
+.modal-note {
+  font-size: 11px;
+  color: var(--on-surface-variant);
+  line-height: 1.5;
+  margin: 2px 0 0;
+}
+
+#sidebar-footer {
+  padding: 10px;
+  border-top: 1px solid var(--outline-variant);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.reset-data-btn:hover { color: var(--error); }
+.reset-data-btn.armed {
+  color: var(--error);
+  background: var(--error-container);
+}
+.footer-row {
+  display: flex;
+  gap: 8px;
+}
+.footer-row .text-btn { flex: 1; }
+
+.text-btn {
+  padding: 8px 12px;
+  border-radius: var(--radius-lg);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--primary-on);
+  background: var(--primary);
+  transition: filter var(--motion-fast), box-shadow var(--motion-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-shadow: var(--elevation-1);
+}
+.text-btn:hover { filter: brightness(0.96); box-shadow: var(--elevation-2); }
+.text-btn:active { filter: brightness(0.9); box-shadow: var(--elevation-1); }
+.text-btn.small { padding: 6px 6px; font-size: 10.5px; gap: 4px; }
+.text-btn.small .btn-icon svg { width: 11px; height: 11px; }
+.text-btn.danger { color: var(--error); background: var(--error-container); box-shadow: none; }
+.text-btn.neutral {
+  color: var(--on-surface-variant);
+  background: var(--surface-4);
+  box-shadow: none;
+}
+.text-btn.neutral:hover { filter: none; background: var(--surface-5); box-shadow: none; }
+.text-btn.neutral:active { filter: none; background: var(--surface-5); }
+.btn-icon { display: flex; }
+.btn-icon svg { width: 13px; height: 13px; }
+
+.filled-btn {
+  padding: 8px 18px;
+  border-radius: var(--radius-lg);
+  font-size: 12.5px;
+  font-weight: 500;
+  background: var(--primary);
+  color: var(--primary-on);
+  transition: filter var(--motion-fast), box-shadow var(--motion-fast);
+  box-shadow: var(--elevation-1);
+}
+.filled-btn:hover { filter: brightness(0.96); box-shadow: var(--elevation-2); }
+.filled-btn:active { filter: brightness(0.9); box-shadow: var(--elevation-1); }
+
+#app-brand {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 3px;
+  padding-top: 4px;
+  min-width: 0;
+}
+.app-brand-top {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-shrink: 0;
+}
+.app-brand-version {
+  font-size: 9.5px;
+  font-weight: 600;
+  color: var(--on-surface);
+  font-family: 'Geist Mono', 'Roboto Mono', 'DejaVu Sans Mono', monospace;
+  white-space: nowrap;
+}
+.app-brand-link {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  text-decoration: none;
+}
+.app-brand-link:hover .app-brand-version { text-decoration: underline; }
+
+.lightmorphic-credit {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  flex-shrink: 0;
+  color: var(--on-surface-variant);
+  font-size: 10.5px;
+  text-decoration: none;
+  opacity: 0.9;
+  white-space: nowrap;
+  transition: opacity var(--motion-fast), color var(--motion-fast);
+}
+.lightmorphic-credit:hover { opacity: 1; color: var(--on-surface); }
+.lightmorphic-credit img { display: block; height: 21px; width: auto; flex-shrink: 0; }
+
+/* Lightmorphic's house update-status widget: one small dot carries the
+   entire update UI (plain state color + progress ring, no icon inside)
+   instead of a separate button — see the update-widget skill for the
+   canonical spec this follows across every self-hosted app. */
+.update-dot {
+  position: relative;
+  flex: none;
+  width: 14px;
+  height: 14px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--on-surface-variant);
+  cursor: default;
+  transition: background var(--motion-fast);
+}
+.update-dot.checking { background: var(--on-surface-variant); opacity: 0.55; }
+.update-dot.up-to-date { background: var(--success-fill); cursor: pointer; }
+.update-dot.available { background: var(--warning-fill); cursor: pointer; }
+.update-dot.downloaded { background: var(--info-fill); cursor: pointer; }
+.update-dot.error { background: var(--danger-fill); }
+.update-dot.downloading { background: transparent; }
+
+/* Manual check: three quick pulses while the answer comes back. */
+.update-dot.pulsing { animation: update-dot-pulse 0.6s ease-in-out 3; }
+@keyframes update-dot-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.55; }
+}
+
+.update-ring {
+  display: none;
+  position: absolute;
+  inset: 0;
+  transform: rotate(-90deg);
+}
+.update-dot.downloading .update-ring { display: block; }
+.update-ring-track {
+  fill: none;
+  stroke: var(--outline-variant);
+  stroke-width: 1.6;
+}
+.update-ring-progress {
+  fill: none;
+  stroke: var(--warning-fill);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 150ms linear;
+}
+
+/* Modern rounded tooltip, replacing the OS-native title attribute look */
+/* Rendered at the document level (not nested inside the hovered element)
+   and positioned in JS via getBoundingClientRect — a tooltip nested
+   inside a scrolling/overflow:hidden sidebar panel gets silently
+   clipped by that ancestor the moment it needs to extend past the
+   panel's edge or top, which is exactly what a CSS-only ::after
+   tooltip can't avoid. */
+#global-tooltip {
+  position: fixed;
+  background: var(--surface-5);
+  color: var(--on-surface);
+  border: 1px solid var(--outline-variant);
+  padding: 5px 10px;
+  border-radius: var(--radius-md);
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.4;
+  /* pre-line: collapses runs of whitespace like normal text, but keeps
+     real newline characters so multi-line tooltips stay readable. */
+  white-space: pre-line;
+  max-width: 320px;
+  box-shadow: var(--elevation-2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--motion-fast);
+  z-index: 9999;
+}
+#global-tooltip.visible { opacity: 1; }
+
+/* ---------- Terminals ---------- */
+
+#terminals {
+  flex: 1;
+  position: relative;
+  min-width: 0;
+  background: var(--bg);
+}
+
+.terminal-pane {
+  position: absolute;
+  inset: 0;
+  padding: 10px 6px 6px 14px;
+  display: none;
+}
+.terminal-pane.active { display: block; }
+
+.xterm-viewport::-webkit-scrollbar { width: 10px; }
+.xterm-viewport::-webkit-scrollbar-thumb {
+  background: var(--surface-5);
+  border-radius: 6px;
+}
+.xterm-viewport::-webkit-scrollbar-track { background: transparent; }
+
+/* Same subtle, themed scrollbar for every other scrolling list in the
+   app (snippets, passwords, history), instead of each platform's own
+   default scrollbar. Firefox doesn't support ::-webkit-scrollbar at all;
+   scrollbar-color/width is its equivalent. */
+#snippet-list, #credential-list, #history-list {
+  scrollbar-width: thin;
+  scrollbar-color: var(--surface-5) transparent;
+}
+#snippet-list::-webkit-scrollbar,
+#credential-list::-webkit-scrollbar,
+#history-list::-webkit-scrollbar {
+  width: 8px;
+}
+#snippet-list::-webkit-scrollbar-thumb,
+#credential-list::-webkit-scrollbar-thumb,
+#history-list::-webkit-scrollbar-thumb {
+  background: var(--surface-5);
+  border-radius: 6px;
+}
+#snippet-list::-webkit-scrollbar-track,
+#credential-list::-webkit-scrollbar-track,
+#history-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.autocomplete-ghost {
+  position: absolute;
+  pointer-events: none;
+  color: var(--on-surface-variant);
+  opacity: 0.55;
+  font-family: 'Geist Mono', 'Roboto Mono', 'DejaVu Sans Mono', monospace;
+  white-space: pre;
+  z-index: 2;
+}
+
+/* ---------- Modals ---------- */
+
+.modal {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.modal.hidden { display: none; }
+.modal-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+.modal-card {
+  position: relative;
+  margin-top: 90px;
+  width: 460px;
+  max-width: calc(100% - 40px);
+  max-height: calc(100% - 130px);
+  background: var(--surface-3);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-md);
+  box-shadow: var(--elevation-3);
+  padding: 18px 18px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: modal-in var(--motion-med);
+}
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.modal-card h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 500;
+}
+.field-label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--on-surface-variant);
+}
+.field-label .hint { font-weight: 400; opacity: 0.8; }
+.field-label textarea {
+  font-family: 'Geist Mono', 'Roboto Mono', 'DejaVu Sans Mono', monospace;
+  font-size: 12px;
+  resize: vertical;
+}
+.modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+.modal-actions .spacer { flex: 1; }
+
+.history-card { width: 560px; }
+.modal-search { margin-bottom: 2px; }
+#history-list {
+  overflow-y: auto;
+  max-height: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.history-item {
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  font-family: 'Geist Mono', 'Roboto Mono', 'DejaVu Sans Mono', monospace;
+  font-size: 12px;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.history-item:hover, .history-item.selected { background: var(--surface-4); }
+
+/* ---------- Toast ---------- */
+
+.toast {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--surface-4);
+  color: var(--on-surface);
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--elevation-2);
+  font-size: 12.5px;
+  z-index: 30;
+  opacity: 0;
+  transition: opacity var(--motion-med), transform var(--motion-med);
+  pointer-events: none;
+}
+.toast.visible { opacity: 1; transform: translateX(-50%) translateY(-4px); }
+.toast.hidden { display: none; }

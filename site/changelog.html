@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Changelog: Fetch Terminal</title>
+<meta name="description" content="Every release of Fetch Terminal and what changed in it, newest first." />
+<meta name="theme-color" content="#0b0b10" />
+<link rel="canonical" href="https://fetchterminal.org/changelog" />
+<link rel="icon" type="image/png" href="favicon.png" />
+<link rel="preload" href="fonts/geist-sans/Geist-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="fonts/geist-sans/Geist-Regular.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/styles.css?v=583dda82" />
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap site-header-row">
+      <a class="wordmark" href="/" translate="no" style="text-decoration:none">Fetch&nbsp;Terminal</a>
+      <nav class="site-nav" aria-label="Page sections">
+        <a href="/#features">Features</a>
+        <a href="/#security">Security</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/#install">Install</a>
+        <div id="all-apps"></div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="legal">
+      <div class="wrap">
+        <h1>Changelog</h1>
+        <p class="lede">Every release, newest first.</p>
+        <div class="prose">
+<p>All notable changes to this project are documented in this file.</p>
+<p>The format is based on <a href="https://keepachangelog.com/en/1.1.0/" target="_blank" rel="noopener noreferrer" aria-label="Keep a Changelog (opens in a new tab)">Keep a Changelog</a>, and this project adheres to <a href="https://semver.org/" target="_blank" rel="noopener noreferrer" aria-label="Semantic Versioning (opens in a new tab)">Semantic Versioning</a>.</p>
+<div class="release">
+<h2 id="1-9-2-2026-10-17">[1.9.2] - 2026-10-17</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Updates come from the project's GitHub releases again. The app checks there once at startup and once an hour, as before, and the dot reads "Can't connect to GitHub" when the check fails.</li>
+<li>The website moves to Cloudflare Pages. The download button still points at fetchterminal.org and is forwarded to the newest AppImage on GitHub.</li>
+<li>The repository gets its README, security page, contributing page and this changelog laid out for GitHub.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-9-1-2026-09-28">[1.9.1] - 2026-09-28</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Updates and downloads briefly came from Buildmorphic instead of GitHub. This release is the one that made that switch, and the next one reverses it.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-9-0-2026-09-06">[1.9.0] - 2026-09-06</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>The app is dark only. The light theme and its Light, Dark and Auto switcher are gone, along with the settings key behind them, and the window and the browser engine's own widgets are fixed to dark.</li>
+<li>No email addresses remain in the package metadata.</li>
+<li>Brand yellow is the default accent on a fresh install.</li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>The first letter typed as the sidebar slides open no longer gets stranded on the line. The terminal now waits for the window to settle before it resizes the shell, instead of resizing a dozen times during the slide.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-8-1-2026-08-28">[1.8.1] - 2026-08-28</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>A code clean-up with no change in behaviour: dead code, unused theme variables, repeated icon-path logic and stale comments removed.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-8-0-2026-08-28">[1.8.0] - 2026-08-28</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Fetch Terminal is now licensed under the GNU General Public License, version 3 or later, instead of the MIT License. The source stays free to read, use and modify; what changes is that anyone distributing a modified version must publish their changes under the same license.</li>
+<li>Every release now also carries a copy of the AppImage under the fixed name <code>Fetch-Terminal.AppImage</code>, so fetchterminal.org's download button starts the download straight away instead of sending you to a releases page to find the right file.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-7-1-2026-08-28">[1.7.1] - 2026-08-28</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>The keep-sidebar-open padlock icon is no longer accent-colored — it follows the theme's text color like the other plain icons.</li>
+<li>The terminal's blinking cursor is now the same color as the text (white on dark, near-black on light) instead of the accent color.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-7-0-2026-08-28">[1.7.0] - 2026-08-28</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Entering the vault PIN wrong five times now locks the vault for a full hour (up from 30 seconds), and the lockout survives quitting and relaunching the app instead of resetting with it.</li>
+<li>Accent-filled buttons (clear, appearance, theme picker, snippet icons) now use the full accent as the fill with a white — or, on light accents, navy — icon on top, instead of a tinted shade of the accent. The "Fetch Terminal" titlebar name and the version number are no longer accent-colored: they follow the theme (white-ish on dark, near-black on light).</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-6-0-2026-08-28">[1.6.0] - 2026-08-28</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>The update dot is now plain color with no icons: click it while green to check for updates on demand (it pulses three times, then either settles back to green or turns amber), amber downloads with the progress line tracing the edge of the circle, and once the line closes at the top the dot turns blue — click blue to restart into the new version. Automatic checks now run hourly instead of every half hour.</li>
+<li>Accent colors are now used at full strength — the exact color picked in the appearance panel, no softening — with the text on them switching automatically: dark text on light accents (amber, lime, green…), white text on dark ones (blue, purple, red…).</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-5-0-2026-08-28">[1.5.0] - 2026-08-28</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Pasting a multi-line script now behaves like GNOME Terminal and Console: the whole script is handed to the shell in one bracketed paste, so you can review it on the prompt and a single Enter runs it top to bottom — still stopping at any password or confirmation prompt a command opens along the way. This replaces the Ctrl+Enter line-by-line paste queue introduced in 1.4.6.</li>
+<li>The terminal's red/green/yellow/blue/magenta/cyan now use the vivid Lightmorphic brand palette in both dark and light themes, instead of the previous washed-out pastels.</li>
+<li>Accent colors across the app are much more saturated, and the appearance picker gains five new accents — Deep Orange, Lime, Light Green, Light Blue and Deep Purple — for fifteen in total.</li>
+<li>Sidebar footer: the "Fetch Terminal" label is gone — the website link now sits on the version number next to the update dot — and the "Created by Lightmorphic" credit is larger and links to lightmorphic.com.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-4-8-2026-08-20">[1.4.8] - 2026-08-20</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>The app failed to start at all on most current Linux systems. If double-clicking Fetch Terminal did nothing, or you saw "AppImages require FUSE to run", that was this: the AppImage needed the old FUSE 2 library, which Ubuntu 23.04 and later, current Fedora, openSUSE and the immutable spins (Silverblue, Bazzite) no longer ship. It now uses a self-contained runtime that needs no FUSE at all. Earlier versions cannot update themselves out of this, so download 1.4.8 once from the Releases page.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-4-7-2026-08-12">[1.4.7] - 2026-08-12</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Replaced the separate "Update to vX.Y.Z" / "Restart &amp; install" button with Lightmorphic's house update-status widget: the small dot next to the app name is now the entire update UI. It's solid green when up to date, solid amber with a download-arrow overlay when an update is available (click to download), a hollow ring tracing the download progress while downloading, solid green with a restart-arrow overlay once downloaded (click to restart), and solid red if it can't reach GitHub. Colors match the exact Lightmorphic palette (<code>#4BAE4F</code> / <code>#FFC006</code> / <code>#F34236</code>) used across every other self-hosted app.</li>
+<li>The dot is no longer clickable to force a manual re-check in the up-to-date/error states — only in the two states that have an actual action to take (download, restart), matching the house spec.</li>
+<li>The app name/version now link to fetchterminal.org instead of the GitHub repo, matching the same house convention.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-4-6-2026-08-11">[1.4.6] - 2026-08-11</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>A multi-line paste could still type the next queued line's raw text straight into an interactive prompt (a <code>sudo</code> password prompt, a y/n confirmation, ...) the instant the previous line's Enter was sent — there's no reliable way to tell "command finished" apart from "command is silently waiting for a password" from the terminal output alone. Nothing is auto-typed anymore. Plain Enter is left completely untouched, so it always does whatever the terminal currently expects.</li>
+</ul>
+<h3 id="added">Added</h3>
+<ul>
+<li>A small indicator now appears while a multi-line paste has queued lines left, showing how many remain and a preview of the next one. Hovering it shows the full remaining script. <code>Ctrl+Enter</code> — a combination no shell or prompt reads any meaning into — deliberately advances to the next line; regular typing and plain Enter are never touched by it.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-4-5-2026-08-11">[1.4.5] - 2026-08-11</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>"Fetch Terminal" + version could silently wrap into a garbled multi-line mess instead of a clean single line whenever the row's content got even slightly too wide for the sidebar: nothing stopped flex-shrink from squeezing text spans below their natural width, which made them wrap internally. Added <code>flex-shrink: 0</code> to the brand/version group and the Lightmorphic credit so the row can only ever overflow cleanly (never happens at current sizes) instead of corrupting into multiple lines.</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>The Lightmorphic logo is 20% bigger again (12px → 14.4px), with the surrounding "Fetch Terminal"/version text trimmed slightly to keep everything on one line at the larger size.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-4-4-2026-08-11">[1.4.4] - 2026-08-11</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>The Lightmorphic credit is bigger again ("by" → "Created by", larger logo) and pushed to the right edge of the sidebar footer, with "Fetch Terminal" and its version left-aligned instead of centered — both still share one line.</li>
+<li>The appearance/theme button is now a filled accent circle like the clear button, instead of only highlighting on hover.</li>
+<li>The window's outer edge outline is twice as thick and explicitly forced square (<code>border-radius: 0</code>), after visual artifacts at the corners on a real display.</li>
+</ul>
+<h3 id="investigated">Investigated</h3>
+<ul>
+<li>Revisited rounded window corners (tried and reverted once already in 0.18.0). Confirmed the underlying constraint still applies: real per-pixel window transparency on Linux only renders correctly with a compositing window manager running, which several of this app's target desktops (Cinnamon/Xfce/MATE spins) often don't run by default — without one, the window still comes back opaque and square regardless of any CSS. Left the window shape as-is.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-4-3-2026-08-11">[1.4.3] - 2026-08-11</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>"Fetch Terminal", its version number, the update-status dot, and the Lightmorphic credit now all sit on a single line in the sidebar footer instead of two. The Lightmorphic credit shrank further ("Created by" → "by", smaller logo, no background) to make room.</li>
+<li>The clear-terminal button now draws an actual broom instead of a vague swoosh, and sits in a permanently filled accent-colored circle instead of only highlighting on hover.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-4-2-2026-08-11">[1.4.2] - 2026-08-11</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>"+ New snippet" moved out of a full-width button under the list and into a small icon button next to the search field at the top of the sidebar.</li>
+<li>The passwords section collapsed further: the "Passwords" label, PIN entry/unlock field, and add/lock actions now all share a single row instead of a header row plus a separate input row. The unlock button and the "lock now" button are now the same button slot, just showing a different icon depending on whether the vault is locked or open.</li>
+<li>The "Created by Lightmorphic" credit is smaller, and the up-to-date/update-available status dot moved back next to the version number (it had ended up next to the Lightmorphic credit instead in 1.4.1, which wasn't the intent).</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-4-1-2026-08-11">[1.4.1] - 2026-08-11</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>A "Created by Lightmorphic" credit under the app name in the sidebar footer, linking to lightmorphic.co.uk, with the existing update-status dot moved alongside it (green once you're on the latest version).</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-4-0-2026-08-11">[1.4.0] - 2026-08-11</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>A clear button in the titlebar, next to the appearance toggle. Sends the same thing typing <code>clear</code> and pressing Enter would, so it works identically over a remote SSH session too, not just local scrollback.</li>
+<li>Snippets can now be reordered by dragging them, via a small grip handle that appears on hover. (Disabled while a search filter is active, since a filtered subset can't map cleanly back to full-list positions.)</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Snippet rows are now a single compact line (name and command side by side) instead of two stacked lines.</li>
+<li>The passwords section is more compact: the PIN entry/unlock row and the "add password" action now live in the section header instead of spanning several stacked rows.</li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Pasting a multi-line script used to run every line immediately and unattended, since each embedded newline reached the shell as its own Enter keypress. A paste now only types the first line; each further line is queued and only gets typed onto the next prompt once you press Enter on the one before it, so a pasted script runs the same way as typing it by hand, one line at a time.</li>
+<li>The app's own auto-updater, GitHub links, and package metadata still pointed at the old <code>fosscharlie/fetch-terminal</code> repo location from before the project moved to <code>lightmorphic/fetch-terminal</code> — the update check would have been polling the wrong repo indefinitely.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-3-3-2026-08-03">[1.3.3] - 2026-08-03</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>The ghost suggestion still read about a pixel too high on at least one real display even after 1.3.2's font-metric fix. The position math checks out exactly against a real xterm.js instance across several DPI scale factors, so the remainder looks like font hinting/antialiasing rather than a geometry bug — nudged the ghost down by a pixel to compensate.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-3-2-2026-08-02">[1.3.2] - 2026-08-02</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>The 1.3.1 fix only corrected the ghost's position, not its size: the ghost div never had its own <code>font-size</code>/<code>line-height</code>, so it fell back to the app's default 13px UI font instead of the terminal's actual 14px font at a 1.15 line-height. That mismatch left the suggestion floating visibly above the real line even once its top-left corner was in the right place. It now reads the terminal's own font size and cell height on every render and matches them exactly, so the ghost sits on the same baseline as what you typed.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-3-1-2026-08-02">[1.3.1] - 2026-08-02</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>The autocomplete ghost suggestion rendered above and to the left of where you were actually typing, instead of right after it on the same line. It's a direct child of <code>.terminal-pane</code>, and for an absolutely positioned element that's the pane's <em>padding box</em> (not its content box) — so it needed the pane's own padding added back in to land on the real cursor cell. Reproduced the exact misalignment and verified the fix against a real xterm.js instance before shipping.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-3-0-2026-08-02">[1.3.0] - 2026-08-02</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>Pin up to 3 snippets to the top of the sidebar list, via a pin icon on each row. Pinned snippets stay accent-colored and visible even without hovering; unpinned ones keep their relative order beneath them. Trying to pin a fourth shows a toast rather than silently failing or bumping one off.</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>A themed, subtly-colored scrollbar (matching the terminal's own) now appears on the snippets, passwords, and history lists instead of the platform's default one.</li>
+<li>Tightened the vertical spacing on snippet rows so more fit on screen at once without scrolling.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-2-0-2026-08-02">[1.2.0] - 2026-08-02</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>A single default snippet, "Clear" (runs <code>clear</code>), on first launch — a blank sidebar with just a "+ New snippet" button doesn't show what a snippet actually is. It's a completely normal snippet from the start: edit or delete it like any other, and it won't come back on its own once it's gone (though it does reappear after "Reset all data," same as a fresh install).</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-1-1-2026-08-02">[1.1.1] - 2026-08-02</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Clicking a snippet (either running it immediately or, with Ctrl+Click, typing it without submitting) left the terminal unfocused, since the click itself lands in the sidebar — you had to click into the terminal yourself before you could keep typing. It now focuses the terminal automatically, so you can start typing the rest of the command right away either way.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-1-0-2026-08-01">[1.1.0] - 2026-08-01</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li><code>Ctrl+Click</code> (or <code>Cmd+Click</code>) on a snippet types it into the terminal without pressing Enter, instead of running it immediately — useful for a snippet that's really a prefix (<code>sudo apt install </code>) meant to be finished by hand. A plain click still runs it right away as before.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="1-0-0-2026-08-01">[1.0.0] - 2026-08-01</h2>
+<p>First stable release. No functional changes from 0.20.2 — this marks the app as feature-complete and hardened for general use: tabs, snippets, searchable history, an encrypted/PIN-gated password vault, theming, self-updating, and self-registering desktop integration, all audited for security and dependency freshness ahead of this release (see 0.19.0's notes for the audit details). From here on, version numbers follow <a href="https://semver.org/" target="_blank" rel="noopener noreferrer" aria-label="Semantic Versioning (opens in a new tab)">Semantic Versioning</a> against the 1.0 baseline.</p>
+</div>
+<div class="release">
+<h2 id="0-20-2-2026-08-01">[0.20.2] - 2026-08-01</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>The window's own icon (set via <code>BrowserWindow</code>'s <code>icon</code> option, what most Linux taskbars/panels actually read for a running window) now reads from the same <code>~/.local/share</code> copy that desktop integration manages — verified world-readable and correct — instead of the copy bundled inside the packaged app's own asar archive, whose path resolution has already caused one round of this exact bug. Falls back to the bundled copy in dev mode or before desktop integration has run.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-20-1-2026-08-01">[0.20.1] - 2026-08-01</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>The icon and <code>.desktop</code> file the app self-registers (0.20.0) could end up owner-only (<code>0600</code>), unreadable to anything but this app's own process, because <code>fs.copyFileSync</code>'s resulting permissions follow the process's own umask rather than the source file's. Neither file has anything sensitive in it — both are now explicitly <code>chmod 644</code> after being written, regardless of umask.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-20-0-2026-08-01">[0.20.0] - 2026-08-01</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>The app now registers itself as a proper desktop application (a <code>.desktop</code> file in <code>~/.local/share/applications</code>, plus the icon in the standard icon-theme location) the first time it's run as a plain AppImage, with no separate integration tool required. Without this there's no launcher for a panel/taskbar to actually pin — pinning always works by remembering a <code>.desktop</code> entry, not a running process, so a plain double-clicked AppImage had nothing to attach a pin to. Re-registers on every launch to stay in sync (this doesn't affect an existing pin, since that's the desktop environment's own state, keyed off the file's name, which never changes), and keeps working across auto-updates since electron-updater replaces the AppImage file in place rather than under a new name.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-19-2-2026-08-01">[0.19.2] - 2026-08-01</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>The 0.19.1 icon fix had no effect in the actual packaged AppImage: <code>build/icons</code> was never listed in <code>package.json</code>'s <code>build.files</code>, so it never got bundled into the app at all — the <code>BrowserWindow</code>'s <code>icon</code> option was pointing at a path that simply doesn't exist once packaged, and silently fell back to the default logo. Added <code>build/icons/**/*</code> to <code>files</code> so the icon actually ships with the app.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-19-1-2026-08-01">[0.19.1] - 2026-08-01</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>The window never set an explicit <code>icon</code>, so on window managers whose taskbar/panel/alt-tab switcher doesn't read the icon out of the AppImage's desktop file, it fell back to Electron's own default logo instead of Fetch Terminal's icon. Pointed the <code>BrowserWindow</code> at the same source icon used for the packaged build's icon set.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-19-0-2026-08-01">[0.19.0] - 2026-08-01</h2>
+<p>A pre-1.0 security and code-quality pass: dependency audit, hardening, and dead-code cleanup, ahead of the first stable release.</p>
+<h3 id="security">Security</h3>
+<ul>
+<li>Bumped Electron <code>33.4.11</code> → <code>43.2.0</code> and electron-builder <code>25.x</code> → <code>26.15.3</code>, closing every advisory <code>npm audit</code> flagged (13 total, one critical) — the app was several Electron majors behind, each carrying its own set of fixed CVEs (use-after-frees, an ASAR integrity bypass, a command-line switch injection issue, and more).</li>
+<li>Restricted <code>shell.openExternal</code> to <code>http:</code>/<code>https:</code> URLs only, both for in-app navigation attempts and the terminal's own link detection. Terminal output isn't fully trusted input (it can come from an SSH session or <code>curl</code>'d text), and <code>shell.openExternal</code> on an arbitrary scheme has a real history as an OS-level code-execution vector, not just "opens a browser."</li>
+<li>Added a 5-attempt lockout (30 seconds) on the vault PIN, on top of the existing scrypt hashing and constant-time comparison — makes scripted PIN guessing pointless rather than merely slow.</li>
+<li>All local data files (snippets, history, settings, the credential vault) are now <code>chmod 600</code>, not just the credential vault file.</li>
+<li>Fixed a latent stored-XSS-shaped bug: the update button and generic icon+label buttons built their markup via <code>innerHTML</code> string interpolation, including the update version string — which ultimately comes from GitHub release metadata, external data. Content-Security-Policy already blocked inline-script execution here, but the pattern itself was wrong; rebuilt both via <code>textContent</code>-based DOM construction so there's nothing to inject in the first place.</li>
+<li>Fixed a script-injection pattern in the release GitHub Actions workflow: workflow-dispatch input and step outputs were substituted directly into shell <code>run:</code> blocks via <code>${{ }}</code>, the standard vector for smuggling shell metacharacters into a CI job that holds <code>GITHUB_TOKEN</code>. Every such value now passes through <code>env:</code> first.</li>
+</ul>
+<h3 id="removed">Removed</h3>
+<ul>
+<li>Two unused SVG icons (<code>key</code>, <code>restore</code>) that were never referenced anywhere.</li>
+<li>Dead window-maximize-state plumbing (<code>window:state</code> IPC broadcast, the <code>.maximized</code> body class, and the unused <code>window:is-maximized</code> handler) left over from the rounded-corners attempt — the CSS rule that read that class no longer exists.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-18-0-2026-08-01">[0.18.0] - 2026-08-01</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Reverted rounded window corners back to a plain square window. Real per-pixel window transparency on Linux only works if a compositing window manager is actually running, and across the range of desktops this app targets — Mint's Cinnamon/Xfce/MATE spins among them — that's often off or unavailable. Without it, the window comes back fully opaque and square regardless of any CSS, so the rounded outline just drew over a still-square backdrop rather than clipping it: worse than square, since now it looked broken. <code>transparent: true</code> and the two Linux command-line switches added while chasing this are removed; the window is back to the exact plain, solid-background approach used before this was attempted, which works identically on every desktop.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-17-0-2026-08-01">[0.17.0] - 2026-08-01</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Rounded corners were still square underneath: <code>enable-transparent-visuals</code> gives the window an alpha channel, but on Linux, Chromium's GPU-accelerated compositing path doesn't actually deliver that alpha to the window server — only its software/CPU compositing path does. Without disabling GPU compositing, the CSS border-radius outline drew correctly while the window surface underneath it stayed fully opaque and square. Added <code>app.disableHardwareAcceleration()</code> alongside the existing switch (Linux only).</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-16-0-2026-08-01">[0.16.0] - 2026-08-01</h2>
+<h3 id="removed">Removed</h3>
+<ul>
+<li>Cut (<code>Ctrl+Shift+X</code> and the right-click "Cut" entry). In practice a terminal is a real, live shell session, not an editable text buffer — even with correct cursor/selection math, "cutting" from the middle of a line means editing text that a real running line editor (readline, zsh's zle, etc.) already owns, and every extra layer of assumptions about shell/line-editor behavior is another way to get it subtly wrong. Copy and Paste remain exactly as they were.</li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Rounded corners still showed a hard square edge behind the rounded outline: <code>html</code> and <code>body</code> shared the exact same opaque background color. <code>body</code> is what actually clips to the border-radius — <code>html</code> is the full, uncropped, perfectly square window rect underneath it, so it painted straight through the four corner slivers that <code>body</code>'s radius cuts away. Made <code>html</code> transparent and left the real background only on <code>body</code>, so those slivers now show whatever's behind the window instead of a flat color.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-15-0-2026-08-01">[0.15.0] - 2026-08-01</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Mid-line cut still didn't work in 0.14.0: xterm.js's own TypeScript declarations claim <code>getSelectionPosition()</code> returns 1-based coordinates, but the actual implementation returns them already 0-based. The extra <code>-1</code> conversion silently made the row comparison fail every time, so cut never actually removed anything, anywhere on the line — verified end-to-end against a real shell and fixed.</li>
+</ul>
+<h3 id="added">Added</h3>
+<ul>
+<li>Click anywhere on the current input line to move the cursor there (like clicking to place your cursor in any normal text field), instead of only being able to type at the end of the line. Works by sending exactly enough Left/Right arrow keypresses to walk the shell's own line editor to the clicked column.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-14-0-2026-08-01">[0.14.0] - 2026-08-01</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Rounded corners still showed black squares poking out past the rounded outline: <code>transparent: true</code> alone isn't enough on Linux/GTK — without an explicit alpha <code>backgroundColor</code> on the <code>BrowserWindow</code>, the native surface paints opaque black anywhere the page's own CSS doesn't explicitly cover, including the four corners clipped off by <code>border-radius</code>. Added <code>backgroundColor: '#00000000'</code>.</li>
+<li>Cut could previously only remove text from the very end of the current input line (an exact-suffix check against the app's own best-effort input tracking). Rewrote it to read xterm's real selection and cursor positions directly: it now cuts anywhere on the current input line, not just the end, by moving the cursor to the selection, backspacing away exactly that span, and returning the cursor to its correct logical position afterward. Selections on any other row (already-run output) still fall back to copy-only, since that can't be safely un-printed.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-13-0-2026-08-01">[0.13.0] - 2026-08-01</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Rounded window corners weren't appearing at all on Linux: Electron's <code>transparent: true</code> needs the <code>--enable-transparent-visuals</code> Chromium switch on Linux, or the window surface never gets an alpha channel and renders fully opaque/square regardless of any CSS. Added the switch.</li>
+<li>Right-click Copy/Cut silently did nothing on a selected terminal string: xterm.js clears its own selection on <code>mousedown</code> (any button) before the app's <code>contextmenu</code> listener ever runs. Fixed by snapshotting the selection in a capture-phase <code>mousedown</code> listener, which runs first.</li>
+<li><code>Ctrl+Shift+X</code> / right-click Cut now actually cuts instead of just copying: if the selected text is still sitting unsubmitted at the end of the current input line, it's removed from the terminal (via backspaces) after being copied. Historical output, mid-line text, and multi-line selections still fall back to copy-only, since there's no safe way to "un-print" text the shell has already processed.</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Rounder corners throughout: bumped the <code>--radius-sm/md/lg</code> design tokens and the window's own corner radius for a more pronounced rounded look, per feedback that the previous radius was too subtle to notice.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-12-0-2026-08-01">[0.12.0] - 2026-08-01</h2>
+<p>A full security and code-quality pass: audited every IPC handler, the password vault, clipboard handling, and the Content-Security-Policy; removed everything that wasn't earning its place.</p>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Copy/paste double-fired: returning <code>false</code> from xterm's key handler only stops xterm's own handling, not the browser's native paste action on the same keypress (xterm's hidden textarea has its own native paste listener) — <code>Ctrl+Shift+V</code> was pasting the clipboard twice. Now calls <code>preventDefault()</code> explicitly.</li>
+<li>Vault PIN comparison used <code>===</code> on hash strings instead of a constant-time comparison — switched to <code>crypto.timingSafeEqual</code>.</li>
+</ul>
+<h3 id="added">Added</h3>
+<ul>
+<li><code>Ctrl+Shift+X</code> (Cut) and a Cut entry in the terminal's right-click menu, alongside Copy/Paste. Behaves the same as Copy, since a terminal selection is historical output rather than editable text with something to actually remove.</li>
+<li>Password vault file (<code>credentials.json</code>) is now <code>chmod 600</code> after every write — defense in depth restricting it to the owning user even on a shared multi-user machine, on top of the existing encryption and PIN gate.</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Tightened the Content-Security-Policy: removed <code>unsafe-inline</code> from <code>script-src</code> (nothing in the app uses inline scripts, so this was pure unused attack surface) and split it from <code>style-src</code>, which still needs it because xterm.js injects its own <code>&lt;style&gt;</code> elements internally.</li>
+<li>Removed <code>@xterm/addon-search</code> — it was loaded into every terminal but never actually used (command history search is a separate, custom modal, not xterm's own search) — along with a chunk of genuinely dead CSS left over from an earlier autocomplete-UI iteration.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-11-2-2026-08-01">[0.11.2] - 2026-08-01</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Unlocking the sidebar only made it auto-collapse after running a snippet — typing directly into the terminal didn't trigger it at all, so an unlocked sidebar could sit open indefinitely. It now collapses the moment you type anything into the terminal too, same as running a snippet already did.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-11-1-2026-08-01">[0.11.1] - 2026-08-01</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Tooltips could get silently clipped by the sidebar's scrolling panels — any tooltip nested inside an <code>overflow: hidden</code>/<code>auto</code> container gets cut off the moment it needs to extend past that container's edge or top, which a CSS-only tooltip can't avoid. Tooltips are now rendered at the document level and positioned in JS, so they're never clipped regardless of which panel they're triggered from, and flip below instead of above when there isn't room.</li>
+</ul>
+<h3 id="added">Added</h3>
+<ul>
+<li>Capped tabs at 4 open at once — a 5th tab was starting to get visually cut off by the titlebar's brand/logo area. The "+" new-tab button disables itself (with an explanatory tooltip) once the limit is reached.</li>
+</ul>
+<ul>
+<li>Rounded window corners with a subtle shadow, using window transparency (needs a compositing desktop; falls back to square corners otherwise, without breaking anything). Corners square off automatically while maximized.</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Titlebar split into two side-by-side regions instead of one bar the tabs seemed to float over the sidebar's top: a left column (the same width as the sidebar panel) holding the toggle/search/lock, flush with the top of the window, and a right region where the tab strip begins. The toggle button stays reachable outside the collapsible part even when the sidebar is hidden.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-10-1-2026-08-01">[0.10.1] - 2026-08-01</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Snippet list picked up the same <code>overflow-x</code> bug already fixed for the password list (<code>overflow-y: auto</code> alone silently promotes the other axis to <code>auto</code> too) — the always-present edit-button tooltip now triggers it, so it needed the same explicit <code>overflow-x: hidden</code>.</li>
+<li>Snippet row's edit pencil sat noticeably farther from the panel edge than the password row's — tightened its right-side padding to match.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-10-0-2026-08-01">[0.10.0] - 2026-08-01</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>Geist (SIL Open Font License) bundled directly in the app as the UI and monospace font, replacing Roboto/Roboto Mono. Loaded from local files only — no CDN, no Google Fonts, no network dependency of any kind beyond checking GitHub for updates.</li>
+<li>Right-click context menu in the terminal (Copy/Paste).</li>
+<li>A subtle 1px outline around the whole app window, using the same outline color as the sidebar/titlebar dividers — with <code>frame: false</code> there's no OS-drawn window border, so without this the app edge was invisible against a similarly dark desktop.</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Copy/paste shortcuts moved to <code>Ctrl+Shift+C</code>/<code>Ctrl+Shift+V</code>. Plain <code>Ctrl+C</code>, <code>Ctrl+V</code>, and <code>Ctrl+X</code> are untouched now and always keep their normal terminal meaning (interrupt, etc.) — the previous behavior (<code>Ctrl+C</code> copying when there was a selection) is reverted.</li>
+<li>Tooltips app-wide redesigned: removed the accent-colored border from the last pass and converted every remaining native browser tooltip to the same style, so the whole app is now consistent — a small translucent panel with a subtle outline, rather than a solid highlight-colored box.</li>
+<li>Password rows: click the row itself to type the password into the active terminal (same interaction as clicking a snippet), instead of a separate "type" button. The pencil icon (same style as the snippet editor) opens an edit view to rename it or set a new password (existing password still can't be viewed — only replaced). Delete moved into that edit view, keeping its two-click confirmation.</li>
+<li>Snippet command text now matches the name's font size instead of being smaller; the name stays bold, the command stays regular weight.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-9-2-2026-08-01">[0.9.2] - 2026-08-01</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>The snippet edit (pencil) icon was <code>display: none</code> until a pixel-perfect hover, which removed it from layout entirely — it's now always present at low opacity (full opacity on hover) so it always reserves its own space and the command text can never render where it sits.</li>
+<li>The password list's horizontal scrollbar: <code>#credential-list</code> had <code>overflow-y: auto</code> with no explicit <code>overflow-x</code>, and CSS silently promotes a <code>visible</code> axis to <code>auto</code> when the other axis isn't <code>visible</code> — set <code>overflow-x: hidden</code> explicitly.</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>The password row's "type into terminal" (key) button now has a filled colored background at rest instead of a bare icon, so it reads clearly as a button.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-9-1-2026-08-01">[0.9.1] - 2026-08-01</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Password vault row buttons now have clear hover tooltips explaining what each does (the key icon names which password it types; the X says "Delete").</li>
+<li>Deleting a saved password now requires a second click on "Click again to delete" (auto-reverting after a few seconds), matching the "Reset all data" confirmation pattern, instead of deleting immediately on the first click.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-9-0-2026-08-01">[0.9.0] - 2026-08-01</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li><code>Ctrl+C</code> copies the terminal's selection instead of sending an interrupt signal, but only when there's actually a selection — with nothing selected it still interrupts a running command as usual. <code>Ctrl+V</code> always pastes.</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Sidebar is locked open by default now, instead of auto-collapsing after running a snippet unless you'd pinned it.</li>
+<li>"+ New snippet" moved above the Passwords section instead of being grouped with Import/Export/branding in the footer.</li>
+<li>Import, Export, and Reset are now one row of small buttons instead of Reset standing alone as a larger, more prominent one.</li>
+<li>Reset no longer pops a native confirmation dialog — clicking it turns it into a "Confirm?" button that has to be clicked again (auto-reverting after a few seconds), so it stays a deliberate, low-visibility action instead of something you'd trigger by accident or use often.</li>
+<li>Tooltips (the update status dot, and now the Light/Dark/Auto theme buttons too) restyled away from a flat, solid-accent-color box into a darker panel with a subtle accent-colored left border — reads as a proper tooltip instead of a colored block.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-8-1-2026-08-01">[0.8.1] - 2026-08-01</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>The update status dot's error tooltip always showed a generic "Update check failed" with no detail, even though the actual reason (network error, rate limit, etc.) was already available — it just wasn't passed through to the tooltip. Now shown inline so a failed check is actually diagnosable from the UI instead of a dead end.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-8-0-2026-08-01">[0.8.0] - 2026-08-01</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>PIN-protected password vault: save a password once (encrypted via the OS keyring through Electron's <code>safeStorage</code>) and click a button to type it into the active terminal whenever a prompt asks for it. Write-only by design — a saved password can never be viewed or exported again, only used or deleted. A separate vault PIN (distinct from encryption at rest, which alone doesn't stop someone else using an already-unlocked computer) gates every use of the vault and auto-locks after 5 minutes idle.</li>
+<li>"Reset all data" button in the sidebar footer, for clearing every snippet, history entry, saved password, and setting on demand — since an AppImage has no uninstall hook to do this automatically when the file is deleted.</li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>The sidebar's search box could overflow past the panel's right edge and push the lock icon out past the visible border, because it was missing <code>min-width: 0</code> on a flex child — a classic flexbox bug where an item won't shrink below its content's natural width. No amount of padding could have fixed the symptom without this.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-7-1-2026-08-01">[0.7.1] - 2026-08-01</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Replaced the OS-native tooltip on the update status dot with a modern rounded one styled in the current accent color.</li>
+<li>Sidebar header spacing adjusted again: the lock icon was sitting flush against the very edge of the panel with no breathing room — it now has a small inset instead, with the search box still filling the rest of the width up to it.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-7-0-2026-08-01">[0.7.0] - 2026-08-01</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Merged the separate theme toggle and accent color buttons into one "Appearance" popover in the titlebar. It now has an explicit Light/Dark/Auto theme selector (Auto follows the desktop's setting — previously only reachable as an unlabeled default, with no way back to it once you'd toggled light/dark) above the accent color swatches.</li>
+<li>Reduced the accent color palette from 15 back down to 10 hues (Red, Orange, Amber, Green, Teal, Cyan, Blue, Indigo, Purple, Pink), dropping the ones added later that were too close to a neighbor to tell apart at a glance.</li>
+<li>Documented the update system and the new appearance popover in the README.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-6-4-2026-08-01">[0.6.4] - 2026-08-01</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Update downloads were failing: the release's <code>latest-linux.yml</code> pointed at a hyphenated filename, but GitHub renames uploaded assets with spaces in them by replacing the spaces with dots, so the two never matched. Build output is now named without spaces (<code>Fetch-Terminal-&lt;version&gt;.AppImage</code>) so the filenames agree.</li>
+</ul>
+<h3 id="added">Added</h3>
+<ul>
+<li>The app now re-checks for updates automatically every 30 minutes while running, in addition to the check at startup.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-6-3-2026-08-01">[0.6.3] - 2026-08-01</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Default accent color changed from Deep Purple to Blue for new installs (existing saved choices are unaffected).</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-6-2-2026-08-01">[0.6.2] - 2026-08-01</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Sidebar header spacing tightened so the lock icon sits flush against the panel's edge, with the search box filling the rest of the width up to it.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-6-1-2026-08-01">[0.6.1] - 2026-08-01</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Sidebar search box goes back to filling the full width of the panel beside the lock icon, instead of a fixed short width.</li>
+<li>The "Fetch Terminal" name and version in the sidebar footer now link to the GitHub repository.</li>
+</ul>
+<h3 id="added">Added</h3>
+<ul>
+<li>A small status dot next to the version number always shows the update state: green for up to date, red for an update available (or downloaded and ready to install), gray while checking or if the last check failed. Hovering it shows the detail; clicking it re-checks for updates on demand.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-6-0-2026-08-01">[0.6.0] - 2026-08-01</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>Automatic update check against GitHub Releases on startup (packaged builds only), with an "Update to vX.Y.Z" button in the sidebar footer when a newer release is available. Clicking it downloads the update in the background, then switches to "Restart &amp; install update" to swap in the new AppImage.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-5-1-2026-08-01">[0.5.1] - 2026-08-01</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Sidebar: replaced the pin icon with the standard lock/unlock icon, always shown in the accent color, and shortened the search box so it sits clearly beside it instead of crowding it out.</li>
+<li>The terminal's ANSI "green" slot (what most distros' default shell prompt uses for <code>user@host</code>) now follows the accent color too, so the prompt reads in the same hue as the rest of the app.</li>
+<li>Expanded the accent color picker from 10 to 15 Material Design colors (added Deep Orange, Yellow, Lime, Light Blue, and Deep Purple).</li>
+<li>Import/Export are now small, neutral-gray buttons instead of accent-filled ones, so "+ New snippet" reads as the one primary action.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-5-0-2026-08-01">[0.5.0] - 2026-08-01</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>Accent color picker: a palette button in the titlebar opens a popover with 10 Material Design colors (Purple, Indigo, Blue, Cyan, Teal, Green, Amber, Orange, Red, Pink). Picking one re-themes the whole app instantly — buttons, the active tab indicator, icons, and the terminal's cursor/ selection color — with correctly-computed light and dark tonal variants for each hue. The choice is remembered across restarts.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-4-1-2026-08-01">[0.4.1] - 2026-08-01</h2>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li>Dropped the gradient/glow styling from 0.4.0 — gradients and colored glow shadows aren't part of Material Design's visual language, however modern they looked. Replaced with a genuine flat Material Design 3 multi-key-color scheme: a violet primary, a muted violet-grey secondary, and a warm coral tertiary (used for the SSH snippet badge). Buttons, the active tab indicator, and the brand text are now solid colors; button hover/active states use M3's elevation-based feedback instead of a colored glow. Regenerated the app icon as a flat solid mark to match.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-4-0-2026-08-01">[0.4.0] - 2026-08-01</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Full redesign, still Material Design 3 underneath but with a modern violet-to-teal gradient accent replacing the flat single-color palette (chosen to stand out from typical flat dark-themed dev tools).</li>
+<li>Titlebar reworked: the sidebar hide/unhide toggle now lives in the tab row (with a clear pressed/active state) instead of floating over the terminal; the "Fetch Terminal" name moved to sit beside the minimize button, rendered in the accent gradient.</li>
+<li>The active tab is now clearly distinguished with a glowing gradient underline and a raised background, instead of a thin single-color line.</li>
+<li>Replaced every emoji/Unicode glyph in the UI with a small, consistent, hand-drawn local icon set (<code>src/icons.js</code>) in a minimal single-stroke style — no icon fonts, no CDN, nothing fetched over the network, ever.</li>
+<li>The sidebar pin button uses a proper pin icon (filled when pinned) next to the search box.</li>
+<li>Added "Fetch Terminal v&lt;version&gt;" under the Import/Export buttons.</li>
+<li>Added a light/dark theme toggle in the titlebar. The app follows the desktop's theme by default (via Electron's <code>nativeTheme</code>); the toggle forces light or dark and the choice is remembered across restarts. Both the UI and the terminal's ANSI color theme now have full light and dark variants.</li>
+<li>Regenerated the app icon with the new gradient mark.</li>
+<li>Packaging: dropped the <code>.deb</code> target — AppImage only, since the app now targets any Linux desktop, not just Debian/Ubuntu-based ones. Added an <code>afterAllArtifactBuild</code> hook (<code>scripts/move-to-downloads.js</code>) that moves the built AppImage into <code>~/Downloads</code> automatically.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-3-0-2026-08-01">[0.3.0] - 2026-08-01</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Rebuilt the theme on proper Material Design 3 dark-scheme tokens: <code>primary</code> (<code>#FBC711</code>)/<code>on-primary</code>, <code>primary-container</code>/<code>on-primary-container</code>, <code>outline</code>/<code>outline-variant</code>, and <code>error</code>/<code>error-container</code> roles, plus surface elevation levels 1-5 tinted with the primary color at M3's standard dark-theme overlay opacities (5/8/11/12/14%) instead of flat surface colors.</li>
+<li>Filled buttons (New snippet, Import, Export, Save) now use a solid <code>#FBC711</code> fill with dark text, matching Material's Filled Button style; destructive actions keep the distinct error/tonal treatment Material reserves for them.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-2-0-2026-08-01">[0.2.0] - 2026-08-01</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>Reworked the color palette to a navy-and-gold theme (<code>#10141C</code> background, <code>#19212B</code> surfaces, <code>#FBC711</code> accent), replacing the original purple Material palette across the UI, the terminal's ANSI color theme, and the generated app icon.</li>
+</ul>
+</div>
+<div class="release">
+<h2 id="0-1-0-2026-08-01">[0.1.0] - 2026-08-01</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>Initial release of Fetch Terminal: a lightweight, standalone Electron terminal emulator for Linux desktop with no GTK or Qt dependency.</li>
+<li>Tabs running the user's default shell via <code>node-pty</code>.</li>
+<li>Custom, frameless Material-style UI drawn entirely in HTML/CSS, consistent across desktop environments.</li>
+<li>Scrollable, searchable command history (<code>Ctrl+Shift+F</code>).</li>
+<li>Inline autocomplete that suggests previously-typed commands as you type (accept with <code>Tab</code> or <code>→</code>).</li>
+<li>Collapsible sidebar of snippets — saved shell commands, including SSH one-liners, that run instantly in the active tab when clicked. Includes a live filter box, a pin/lock to keep the sidebar open, and Markdown export/import for backup and sharing.</li>
+<li>Packaging via <code>electron-builder</code>: AppImage and <code>.deb</code> targets, with a generated application icon.</li>
+<li>README, CHANGELOG, and SECURITY documentation.</li>
+</ul>
+<p>[Unreleased]: https://github.com/lightmorphic/fetch-terminal/compare/0.12.0...HEAD [0.12.0]: https://github.com/lightmorphic/fetch-terminal/compare/0.11.2...0.12.0 [0.11.2]: https://github.com/lightmorphic/fetch-terminal/compare/0.11.1...0.11.2 [0.11.1]: https://github.com/lightmorphic/fetch-terminal/compare/0.11.0...0.11.1 [0.11.0]: https://github.com/lightmorphic/fetch-terminal/compare/0.10.1...0.11.0 [0.10.1]: https://github.com/lightmorphic/fetch-terminal/compare/0.10.0...0.10.1 [0.10.0]: https://github.com/lightmorphic/fetch-terminal/compare/0.9.2...0.10.0 [0.9.2]: https://github.com/lightmorphic/fetch-terminal/compare/0.9.1...0.9.2 [0.9.1]: https://github.com/lightmorphic/fetch-terminal/compare/0.9.0...0.9.1 [0.9.0]: https://github.com/lightmorphic/fetch-terminal/compare/0.8.1...0.9.0 [0.8.1]: https://github.com/lightmorphic/fetch-terminal/compare/0.8.0...0.8.1 [0.8.0]: https://github.com/lightmorphic/fetch-terminal/compare/0.7.1...0.8.0 [0.7.1]: https://github.com/lightmorphic/fetch-terminal/compare/0.7.0...0.7.1 [0.7.0]: https://github.com/lightmorphic/fetch-terminal/compare/0.6.4...0.7.0 [0.6.4]: https://github.com/lightmorphic/fetch-terminal/compare/0.6.3...0.6.4 [0.6.3]: https://github.com/lightmorphic/fetch-terminal/compare/0.6.2...0.6.3 [0.6.2]: https://github.com/lightmorphic/fetch-terminal/compare/0.6.1...0.6.2 [0.6.1]: https://github.com/lightmorphic/fetch-terminal/compare/0.6.0...0.6.1 [0.6.0]: https://github.com/lightmorphic/fetch-terminal/compare/0.5.1...0.6.0 [0.5.1]: https://github.com/lightmorphic/fetch-terminal/compare/0.5.0...0.5.1 [0.5.0]: https://github.com/lightmorphic/fetch-terminal/compare/0.4.1...0.5.0 [0.4.1]: https://github.com/lightmorphic/fetch-terminal/compare/0.4.0...0.4.1 [0.4.0]: https://github.com/lightmorphic/fetch-terminal/compare/0.3.0...0.4.0 [0.3.0]: https://github.com/lightmorphic/fetch-terminal/compare/0.2.0...0.3.0 [0.2.0]: https://github.com/lightmorphic/fetch-terminal/compare/0.1.0...0.2.0 [0.1.0]: https://github.com/lightmorphic/fetch-terminal/releases/tag/0.1.0</p>
+</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <nav class="wrap site-footer-nav" aria-label="Page sections, repeated">
+      <a href="/#features">Features</a>
+      <a href="/#security">Security</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/#install">Install</a>
+      <a href="/">Home</a>
+    </nav>
+    <div class="wrap site-footer-row">
+      <span translate="no">Fetch&nbsp;Terminal</span>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <a href="/source">Source</a>
+      <a class="site-footer-sponsor lightmorphic-badge" href="https://lightmorphic.com" target="_blank" rel="noopener noreferrer" translate="no">
+        <span>Created by</span>
+        <img src="images/lightmorphic-dark-tb-250x50-sq.webp" alt="Lightmorphic" width="125" height="25" loading="lazy" />
+        <span class="external-link-icon" data-icon="externalLink" aria-hidden="true"></span>
+      </a>
+    </div>
+  <!-- github-strip -->
+  <div class="oss-bar">
+    <div class="wrap oss-bar-row">
+      <div class="marks">
+        <a href="https://github.com/gh-lm/fetch" target="_blank" rel="noopener noreferrer" aria-label="Fetch Terminal on GitHub (opens in a new tab)">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        </a>
+        <a href="https://opensource.org" target="_blank" rel="noopener noreferrer" aria-label="Open Source Initiative (opens in a new tab)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="5" r="2.6"/><circle cx="5.2" cy="17" r="2.6"/><circle cx="18.8" cy="17" r="2.6"/>
+            <path d="M10.7 7.3 6.5 14.7M13.3 7.3l4.2 7.4M7.8 17h8.4"/>
+          </svg>
+        </a>
+      </div>
+      <nav aria-label="Source code">
+        <a href="https://github.com/gh-lm/fetch" target="_blank" rel="noopener noreferrer" aria-label="Repository on GitHub (opens in a new tab)">Repository</a>
+        <a href="https://github.com/gh-lm/fetch/blob/main/README.md" target="_blank" rel="noopener noreferrer" aria-label="Documentation on GitHub (opens in a new tab)">Documentation</a>
+        <a href="https://github.com/gh-lm/fetch/security/policy" target="_blank" rel="noopener noreferrer" aria-label="Security on GitHub (opens in a new tab)">Security</a>
+        <a href="https://github.com/gh-lm/fetch/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" aria-label="Licence on GitHub (opens in a new tab)">Licence</a>
+        <a href="https://github.com/gh-lm/fetch/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" aria-label="Changelog on GitHub (opens in a new tab)">Changelog</a>
+        <a href="https://github.com/gh-lm/fetch/issues" target="_blank" rel="noopener noreferrer" aria-label="Issues on GitHub (opens in a new tab)">Issues</a>
+        <a href="https://github.com/gh-lm/fetch/releases" target="_blank" rel="noopener noreferrer" aria-label="Releases on GitHub (opens in a new tab)">Releases</a>
+      </nav>
+    </div>
+  </div>
+  <!-- /github-strip -->
+  <div class="sub-footer">
+    <div class="wrap">
+      <p>
+        © Lightmorphic Ltd. Registered in England and Wales, company number <a class="company-number" href="https://find-and-update.company-information.service.gov.uk/company/17423646">17423646</a>.<br />
+        Registered office: 82A James Carter Road, Mildenhall, IP28 7DE.<br />
+        Page last updated: <time id="last-updated" datetime="2026-10-17">17 October 2026</time>.
+      </p>
+      <nav aria-label="Legal">
+        <a href="/privacy">Privacy</a>
+        <a href="/cookies">Cookies</a>
+        <a href="/terms">Terms</a>
+        <a href="/accessibility">Accessibility</a>
+        <a href="/complaints">Complaints</a>
+      </nav>
+    </div>
+  </div>
+  </footer>
+
+  <script src="icons.js"></script>
+  <script src="https://apps.lightmorphic.com/launcher.js" defer></script>
+</body>
+</html>

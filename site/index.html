@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fetch Terminal: a terminal for Linux, built with Electron</title>
+<meta name="description" content="An open source terminal for Linux built for people who don't want to memorize commands: snippets, autocomplete, an encrypted password vault, and fifteen accent colours on a dark theme." />
+<meta name="theme-color" content="#0b0b10" />
+<link rel="canonical" href="https://fetchterminal.org/" />
+<link rel="icon" type="image/png" href="favicon.png" />
+<link rel="preload" href="fonts/geist-sans/Geist-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="fonts/geist-sans/Geist-Regular.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="vendor/xterm.css" />
+<link rel="stylesheet" href="/styles.css?v=583dda82" />
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap site-header-row">
+      <span class="wordmark" translate="no">Fetch&nbsp;Terminal</span>
+      <nav class="site-nav" aria-label="Page sections">
+        <a href="#features">Features</a>
+        <a href="#security">Security</a>
+        <a href="#faq">FAQ</a>
+        <a href="#install">Install</a>
+        <div id="all-apps"></div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <h1>No Prior Terminal Experience Required.</h1>
+          <p class="hero-sub">
+            A terminal you’ll actually want to live in: tabs, snippets,
+            an encrypted password vault, and a dark theme with fifteen
+            accent colours to make it yours. It runs entirely locally;
+            nothing is phoned home except a release check.
+          </p>
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="/download/latest/Fetch-Terminal.AppImage" download>Download for Linux</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <div class="demo-frame" id="demo-frame" role="img" aria-label="Fetch Terminal's window, running a scripted demo session: listing files, checking git status with an autocomplete suggestion, then connecting to a saved SSH snippet and using a saved password.">
+          <div class="demo-titlebar" aria-hidden="true">
+            <span class="demo-sidebar-toggle" data-icon="sidebar"></span>
+            <div class="demo-tabs">
+              <div class="demo-tab active">Shell</div>
+            </div>
+            <div class="demo-titlebar-spacer"></div>
+            <span class="demo-appearance" data-icon="palette"></span>
+            <span class="demo-titlebar-name" translate="no">Fetch&nbsp;Terminal</span>
+            <div class="demo-winctl">
+              <span data-icon="minimize"></span>
+              <span data-icon="maximize"></span>
+              <span class="demo-winctl-close" data-icon="closeWindow"></span>
+            </div>
+          </div>
+          <div class="demo-body" aria-hidden="true">
+            <aside class="demo-sidebar">
+              <div class="demo-search"><span data-icon="search"></span><span class="demo-search-text">Search snippets</span></div>
+              <div class="demo-snippet-list">
+                <div class="demo-snippet">
+                  <span class="demo-snippet-icon" data-icon="dollar"></span>
+                  <span class="demo-snippet-text">
+                    <span class="demo-snippet-name">Clear</span>
+                    <span class="demo-snippet-cmd">clear</span>
+                  </span>
+                </div>
+                <div class="demo-snippet is-remote" id="demo-snippet-deploy">
+                  <span class="demo-snippet-icon" data-icon="arrow"></span>
+                  <span class="demo-snippet-text">
+                    <span class="demo-snippet-name">Deploy prod</span>
+                    <span class="demo-snippet-cmd">ssh deploy@prod.example.com</span>
+                  </span>
+                </div>
+                <div class="demo-snippet">
+                  <span class="demo-snippet-icon" data-icon="dollar"></span>
+                  <span class="demo-snippet-text">
+                    <span class="demo-snippet-name">List files</span>
+                    <span class="demo-snippet-cmd">ls -la</span>
+                  </span>
+                </div>
+              </div>
+              <div class="demo-vault">
+                <div class="demo-vault-title"><span data-icon="lock"></span> Passwords</div>
+                <div class="demo-vault-row" id="demo-vault-row">
+                  <span class="demo-vault-name">prod-server</span>
+                  <span class="demo-vault-edit" data-icon="edit"></span>
+                </div>
+              </div>
+            </aside>
+            <div class="demo-terminal-pane">
+              <div id="demo-terminal"></div>
+            </div>
+          </div>
+        </div>
+        <p class="demo-caption">
+          <span class="demo-caption-dot" aria-hidden="true"></span>
+          Live and scripted, not a screenshot or a video. Same code,
+          colors, and icons as the real app, right down to the SVGs. It
+          can’t reach your machine from here; download it for that part.
+        </p>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="wrap">
+        <h2>What’s actually in it</h2>
+        <div class="feature-grid">
+
+          <article class="feature-card">
+            <div class="feature-illustration feature-illustration-accent" aria-hidden="true">
+              <div class="mini-swatch-row">
+                <span class="mini-swatch" style="--h:355"></span>
+                <span class="mini-swatch" style="--h:174"></span>
+                <span class="mini-swatch" style="--h:217"></span>
+                <span class="mini-swatch" style="--h:291"></span>
+                <span class="mini-swatch selected" style="--h:330"></span>
+              </div>
+            </div>
+            <h3>Fifteen accent colours</h3>
+            <p>Pick one and the whole app re-colours instantly: buttons,
+              tabs, icons, even the selection highlight in the terminal.
+              Dark theme only, tuned for long sessions.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-illustration" aria-hidden="true">
+              <div class="mini-snippet-row">
+                <span class="mini-icon" data-icon="arrow"></span>
+                <span class="mini-snippet-cmd">ssh deploy@prod</span>
+              </div>
+              <div class="mini-hint">Ctrl+Click skips pressing Enter</div>
+            </div>
+            <h3>Snippets, including SSH one-liners</h3>
+            <p>Save a command once, run it with a click. Ctrl+Click types
+              it without submitting: handy when a snippet is really a
+              prefix you finish by hand.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-illustration" aria-hidden="true">
+              <div class="mini-vault-row"><span data-icon="lock"></span> prod-server</div>
+              <div class="mini-hint">Encrypted · write-only · PIN-gated</div>
+            </div>
+            <h3>A password vault that can’t be read back</h3>
+            <p>Encrypted with your OS’s own keyring. Once saved, a
+              password can never be viewed or exported again. It can only
+              be used, or deleted, behind a separate PIN that auto-locks.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-illustration" aria-hidden="true">
+              <div class="mini-terminal-line">git<span class="mini-ghost"> status</span></div>
+            </div>
+            <h3>Inline autocomplete</h3>
+            <p>Suggests previously-typed commands as you type, drawn as a
+              ghost you finish with <kbd translate="no">Tab</kbd> or <kbd translate="no">→</kbd>. No
+              shell config required.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-illustration" aria-hidden="true">
+              <div class="mini-update-dot"></div>
+              <div class="mini-hint">Checks hourly — or click the dot to check now</div>
+            </div>
+            <h3>Updates itself, on your terms</h3>
+            <p>One plain dot is the whole update UI: green means up to
+              date, amber means an update is ready, blue means click to
+              restart into the new version. Nothing downloads or installs
+              without you clicking it yourself.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-illustration" aria-hidden="true">
+              <div class="mini-terminal-line">sudo apt update<br />sudo apt upgrade</div>
+              <div class="mini-hint">Nothing runs until you press Enter</div>
+            </div>
+            <h3>Paste whole scripts, safely</h3>
+            <p>Paste a multi-line script and the shell takes it as one
+              block — review it, press Enter once, and it runs top to
+              bottom, still pausing properly for passwords.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-illustration" aria-hidden="true">
+              <div class="mini-terminal-line">git<span class="mini-ghost"> push origin main</span></div>
+              <div class="mini-hint">Stored locally, searchable, yours</div>
+            </div>
+            <h3>Searchable command history</h3>
+            <p>Every command you run is kept in a local, searchable
+              history — it’s what powers the autocomplete, and it never
+              leaves your machine.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-illustration" aria-hidden="true">
+              <div class="mini-desktop-icon"></div>
+              <div class="mini-hint">.desktop entry, no extra tool needed</div>
+            </div>
+            <h3>A real desktop citizen</h3>
+            <p>Registers itself with your application menu on first run:
+              pin it to your taskbar like anything else you installed, no
+              AppImage integration tool required.</p>
+          </article>
+
+        </div>
+
+        <a class="features-credit lightmorphic-badge" href="https://lightmorphic.com" target="_blank" rel="noopener noreferrer" translate="no">
+          <span>Created by</span>
+          <img src="images/lightmorphic-dark-tb-250x50-sq.webp" alt="Lightmorphic" width="125" height="25" loading="lazy" />
+          <span class="external-link-icon" data-icon="externalLink" aria-hidden="true"></span>
+        </a>
+      </div>
+    </section>
+
+    <section class="security" id="security">
+      <div class="wrap security-grid">
+        <div>
+          <h2>Built to be looked at</h2>
+          <p>Every release is audited for dependency vulnerabilities
+            before it ships, not after someone finds one. Node
+            integration in the renderer is a deliberate, documented
+            tradeoff: the app never loads anything but its own bundled
+            UI, every external link is restricted to <code translate="no">http(s)</code>,
+            and the full reasoning is written down, not asserted.</p>
+          <p><a class="text-link" href="/security">Read the full security policy →</a></p>
+        </div>
+        <ul class="security-list">
+          <li>GPL licensed, read every line yourself</li>
+          <li>No analytics, no telemetry, no tracking on this site or in the app</li>
+          <li>Passwords encrypted via your OS’s own keyring, never a homemade cipher</li>
+          <li>PIN comparison is constant-time; five wrong guesses lock the vault for an hour, even across restarts</li>
+          <li>Every local file it writes is locked to your own user account</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="faq" id="faq">
+      <div class="wrap">
+        <h2>Questions people actually ask</h2>
+        <div class="faq-grid">
+          <article class="faq-item">
+            <h3>Is Fetch Terminal free?</h3>
+            <p>Yes. It's free, open source, and licensed under the GNU
+              General Public License (v3 or later) — you can read every
+              line of the <a class="text-link" href="/source">source code</a>
+              yourself.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Which Linux distributions does it run on?</h3>
+            <p>Any modern distribution that can run an AppImage — Ubuntu,
+              Fedora, openSUSE, Mint, Arch and the immutable spins. It
+              needs no FUSE library at all, so it starts on current
+              systems out of the box.</p>
+          </article>
+          <article class="faq-item">
+            <h3>How are saved passwords protected?</h3>
+            <p>Each password is encrypted by your operating system's own
+              keyring before it touches disk, and the app is write-only:
+              once saved, a password can never be viewed or exported
+              again — only used or deleted, behind a PIN. Five wrong PIN
+              guesses lock the vault for an hour, even across restarts.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Does it collect any data?</h3>
+            <p>No. There are no analytics, no telemetry and no tracking,
+              in the app or on this site. The only network request the app
+              makes on its own is a check for new releases.</p>
+          </article>
+          <article class="faq-item">
+            <h3>Can I paste a whole script into it?</h3>
+            <p>Yes. A multi-line paste reaches the shell as one block, so
+              nothing runs until you press Enter — then it runs top to
+              bottom, still stopping at password prompts.</p>
+          </article>
+          <article class="faq-item">
+            <h3>How do updates work?</h3>
+            <p>A single dot in the corner: green means up to date (click
+              it to check on demand), amber means an update is ready to
+              download, blue means click to restart into the new version.
+              Nothing installs without you clicking it yourself.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="install" id="install">
+      <div class="wrap install-grid">
+        <div>
+          <h2>Get it running</h2>
+          <p>Grab the AppImage from the latest release, make it
+            executable, and run it. That’s the whole install.</p>
+          <a class="btn btn-primary" href="/download/latest/Fetch-Terminal.AppImage" download>Download for Linux</a>
+        </div>
+        <pre class="install-code"><code translate="no">chmod +x Fetch-Terminal-*.AppImage
+./Fetch-Terminal-*.AppImage</code></pre>
+      </div>
+      <div class="wrap">
+        <p class="install-source">
+          Prefer to build it yourself? <code translate="no">git clone</code> the repo,
+          then <code translate="no">npm install &amp;&amp; npm run dist</code>. Full steps
+          are in the <a class="text-link" href="/docs">README</a>.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <nav class="wrap site-footer-nav" aria-label="Page sections, repeated">
+      <a href="#features">Features</a>
+      <a href="#security">Security</a>
+      <a href="#faq">FAQ</a>
+      <a href="#install">Install</a>
+      <a href="#main">Back to top</a>
+    </nav>
+    <div class="wrap site-footer-row">
+      <span translate="no">Fetch&nbsp;Terminal</span>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <a href="/source">Source</a>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <span>This page loads nothing from anywhere else except Lightmorphic’s own app launcher. View its source; it’s the whole thing.</span>
+      <a class="site-footer-sponsor lightmorphic-badge" href="https://lightmorphic.com" target="_blank" rel="noopener noreferrer" translate="no">
+        <span>Created by</span>
+        <img src="images/lightmorphic-dark-tb-250x50-sq.webp" alt="Lightmorphic" width="125" height="25" loading="lazy" />
+        <span class="external-link-icon" data-icon="externalLink" aria-hidden="true"></span>
+      </a>
+    </div>
+  <!-- github-strip -->
+  <div class="oss-bar">
+    <div class="wrap oss-bar-row">
+      <div class="marks">
+        <a href="https://github.com/gh-lm/fetch" target="_blank" rel="noopener noreferrer" aria-label="Fetch Terminal on GitHub (opens in a new tab)">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        </a>
+        <a href="https://opensource.org" target="_blank" rel="noopener noreferrer" aria-label="Open Source Initiative (opens in a new tab)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="5" r="2.6"/><circle cx="5.2" cy="17" r="2.6"/><circle cx="18.8" cy="17" r="2.6"/>
+            <path d="M10.7 7.3 6.5 14.7M13.3 7.3l4.2 7.4M7.8 17h8.4"/>
+          </svg>
+        </a>
+      </div>
+      <nav aria-label="Source code">
+        <a href="https://github.com/gh-lm/fetch" target="_blank" rel="noopener noreferrer" aria-label="Repository on GitHub (opens in a new tab)">Repository</a>
+        <a href="https://github.com/gh-lm/fetch/blob/main/README.md" target="_blank" rel="noopener noreferrer" aria-label="Documentation on GitHub (opens in a new tab)">Documentation</a>
+        <a href="https://github.com/gh-lm/fetch/security/policy" target="_blank" rel="noopener noreferrer" aria-label="Security on GitHub (opens in a new tab)">Security</a>
+        <a href="https://github.com/gh-lm/fetch/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" aria-label="Licence on GitHub (opens in a new tab)">Licence</a>
+        <a href="https://github.com/gh-lm/fetch/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" aria-label="Changelog on GitHub (opens in a new tab)">Changelog</a>
+        <a href="https://github.com/gh-lm/fetch/issues" target="_blank" rel="noopener noreferrer" aria-label="Issues on GitHub (opens in a new tab)">Issues</a>
+        <a href="https://github.com/gh-lm/fetch/releases" target="_blank" rel="noopener noreferrer" aria-label="Releases on GitHub (opens in a new tab)">Releases</a>
+      </nav>
+    </div>
+  </div>
+  <!-- /github-strip -->
+  <div class="sub-footer">
+    <div class="wrap">
+      <p>
+        © Lightmorphic Ltd. Registered in England and Wales, company number <a class="company-number" href="https://find-and-update.company-information.service.gov.uk/company/17423646">17423646</a>.<br />
+        Registered office: 82A James Carter Road, Mildenhall, IP28 7DE.<br />
+        Page last updated: <time id="last-updated" datetime="2026-10-17">17 October 2026</time>.
+      </p>
+      <nav aria-label="Legal">
+        <a href="/privacy">Privacy</a>
+        <a href="/cookies">Cookies</a>
+        <a href="/terms">Terms</a>
+        <a href="/accessibility">Accessibility</a>
+        <a href="/complaints">Complaints</a>
+      </nav>
+    </div>
+  </div>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://lightmorphic.com/#organization",
+        "name": "Lightmorphic",
+        "url": "https://lightmorphic.com/"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://fetchterminal.org/#website",
+        "url": "https://fetchterminal.org/",
+        "name": "Fetch Terminal",
+        "publisher": { "@id": "https://lightmorphic.com/#organization" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://fetchterminal.org/#webpage",
+        "url": "https://fetchterminal.org/",
+        "name": "Fetch Terminal: a terminal for Linux, built with Electron",
+        "description": "An open source terminal for Linux built for people who don't want to memorize commands: snippets, autocomplete, an encrypted password vault, and fifteen accent colours on a dark theme.",
+        "isPartOf": { "@id": "https://fetchterminal.org/#website" },
+        "dateModified": "2026-09-26"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Fetch Terminal",
+        "operatingSystem": "Linux",
+        "applicationCategory": "DeveloperApplication",
+        "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+        "downloadUrl": "https://fetchterminal.org/download/latest/Fetch-Terminal.AppImage",
+        "author": { "@id": "https://lightmorphic.com/#organization" },
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is Fetch Terminal free?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. It's free, open source, and licensed under the GNU General Public License (v3 or later) — you can read every line of the source code yourself." }
+          },
+          {
+            "@type": "Question",
+            "name": "Which Linux distributions does it run on?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Any modern distribution that can run an AppImage — Ubuntu, Fedora, openSUSE, Mint, Arch and the immutable spins. It needs no FUSE library at all, so it starts on current systems out of the box." }
+          },
+          {
+            "@type": "Question",
+            "name": "How are saved passwords protected?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Each password is encrypted by your operating system's own keyring before it touches disk, and the app is write-only: once saved, a password can never be viewed or exported again — only used or deleted, behind a PIN. Five wrong PIN guesses lock the vault for an hour, even across restarts." }
+          },
+          {
+            "@type": "Question",
+            "name": "Does it collect any data?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. There are no analytics, no telemetry and no tracking, in the app or on the website. The only network request the app makes on its own is a check for new releases." }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I paste a whole script into it?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. A multi-line paste reaches the shell as one block, so nothing runs until you press Enter — then it runs top to bottom, still stopping at password prompts." }
+          },
+          {
+            "@type": "Question",
+            "name": "How do updates work?",
+            "acceptedAnswer": { "@type": "Answer", "text": "A single dot in the corner: green means up to date (click it to check on demand), amber means an update is ready to download, blue means click to restart into the new version. Nothing installs without you clicking it yourself." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <script src="vendor/xterm.js"></script>
+  <script src="icons.js"></script>
+  <script src="demo.js"></script>
+  <script src="https://apps.lightmorphic.com/launcher.js" defer></script>
+</body>
+</html>

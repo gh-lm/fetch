@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Privacy: Fetch Terminal</title>
+<meta name="description" content="What this website and the Fetch Terminal app collect about you, which is nothing, and where your own data lives." />
+<meta name="theme-color" content="#0b0b10" />
+<link rel="canonical" href="https://fetchterminal.org/privacy" />
+<link rel="icon" type="image/png" href="favicon.png" />
+<link rel="preload" href="fonts/geist-sans/Geist-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="fonts/geist-sans/Geist-Regular.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/styles.css?v=583dda82" />
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap site-header-row">
+      <a class="wordmark" href="/" translate="no" style="text-decoration:none">Fetch&nbsp;Terminal</a>
+      <nav class="site-nav" aria-label="Page sections">
+        <a href="/#features">Features</a>
+        <a href="/#security">Security</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/#install">Install</a>
+        <div id="all-apps"></div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="legal">
+      <div class="wrap">
+        <h1>Privacy</h1>
+        <p class="lede">Short version: this website collects nothing about you, and the app keeps everything on your own computer.</p>
+        <div class="prose">
+
+      <h2>This website</h2>
+      <p>These pages are plain files. They set no cookies, run no analytics, have no forms and load nothing from another company, so there is nothing for us to collect and nothing for us to keep. We hold no personal data about anyone who reads this site. The apps menu in the top corner loads a script and its icons from apps.lightmorphic.com, which is also ours. It sets no cookies, stores nothing and sends nothing back.</p>
+      <p>The site is hosted on Cloudflare Pages, and the download button fetches the app from GitHub. Cloudflare receives your IP address when your browser asks for a page, as any web host does, and GitHub receives it when you download the app. Both use it to serve the request and to guard against abuse. Their handling is described in <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare's privacy notice</a> and <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub's privacy statement</a>.</p>
+
+      <h2>The Fetch Terminal app</h2>
+      <p>Fetch Terminal is something you install on your own computer. We never see it, and it never contacts us. There is no account, no licence check and no usage reporting of any kind.</p>
+      <p>What your own copy stores, on your own disk, in your user configuration folder:</p>
+      <ul>
+        <li>Your saved snippets, which can include the addresses and usernames you connect to.</li>
+        <li>Your command history, which is what powers the autocomplete.</li>
+        <li>Your chosen accent colour.</li>
+        <li>Your vault PIN, stored only as a salted hash, and your saved passwords, each encrypted by your operating system's own keyring before it touches the disk.</li>
+      </ul>
+      <p>Every one of those files is readable by your user account only. Deleting them, or using the Reset button in the app, removes everything. Nothing is backed up anywhere else by us.</p>
+
+      <h2>What the app sends out</h2>
+      <p>One thing on its own: a check for new releases, once when it starts and once an hour after that, or when you click the green dot. That is a request to GitHub, which sees your IP address and the version you are running. GitHub's handling of it is described in <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub's privacy statement</a>. Nothing else leaves the app unless you type a command that sends it.</p>
+      <p>What you run inside the terminal is yours. If you connect to a server, that server sees what any terminal would show it. The app adds nothing.</p>
+
+      <h2>Your rights</h2>
+      <p>Since we hold no personal data about you, there is nothing for us to disclose, correct or delete. If you believe otherwise, write to <a href="mailto:privacy@lightmorphic.com">privacy@lightmorphic.com</a> and we will answer within 30 days. You may also complain to the <a href="https://ico.org.uk/">Information Commissioner's Office</a>.</p>
+      <p>The data controller for this website is Lightmorphic Ltd, 82A James Carter Road, Mildenhall, IP28 7DE.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <nav class="wrap site-footer-nav" aria-label="Page sections, repeated">
+      <a href="/#features">Features</a>
+      <a href="/#security">Security</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/#install">Install</a>
+      <a href="/">Home</a>
+    </nav>
+    <div class="wrap site-footer-row">
+      <span translate="no">Fetch&nbsp;Terminal</span>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <a href="/source">Source</a>
+      <a class="site-footer-sponsor lightmorphic-badge" href="https://lightmorphic.com" target="_blank" rel="noopener noreferrer" translate="no">
+        <span>Created by</span>
+        <img src="images/lightmorphic-dark-tb-250x50-sq.webp" alt="Lightmorphic" width="125" height="25" loading="lazy" />
+        <span class="external-link-icon" data-icon="externalLink" aria-hidden="true"></span>
+      </a>
+    </div>
+  <!-- github-strip -->
+  <div class="oss-bar">
+    <div class="wrap oss-bar-row">
+      <div class="marks">
+        <a href="https://github.com/gh-lm/fetch" target="_blank" rel="noopener noreferrer" aria-label="Fetch Terminal on GitHub (opens in a new tab)">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        </a>
+        <a href="https://opensource.org" target="_blank" rel="noopener noreferrer" aria-label="Open Source Initiative (opens in a new tab)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="5" r="2.6"/><circle cx="5.2" cy="17" r="2.6"/><circle cx="18.8" cy="17" r="2.6"/>
+            <path d="M10.7 7.3 6.5 14.7M13.3 7.3l4.2 7.4M7.8 17h8.4"/>
+          </svg>
+        </a>
+      </div>
+      <nav aria-label="Source code">
+        <a href="https://github.com/gh-lm/fetch" target="_blank" rel="noopener noreferrer" aria-label="Repository on GitHub (opens in a new tab)">Repository</a>
+        <a href="https://github.com/gh-lm/fetch/blob/main/README.md" target="_blank" rel="noopener noreferrer" aria-label="Documentation on GitHub (opens in a new tab)">Documentation</a>
+        <a href="https://github.com/gh-lm/fetch/security/policy" target="_blank" rel="noopener noreferrer" aria-label="Security on GitHub (opens in a new tab)">Security</a>
+        <a href="https://github.com/gh-lm/fetch/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" aria-label="Licence on GitHub (opens in a new tab)">Licence</a>
+        <a href="https://github.com/gh-lm/fetch/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" aria-label="Changelog on GitHub (opens in a new tab)">Changelog</a>
+        <a href="https://github.com/gh-lm/fetch/issues" target="_blank" rel="noopener noreferrer" aria-label="Issues on GitHub (opens in a new tab)">Issues</a>
+        <a href="https://github.com/gh-lm/fetch/releases" target="_blank" rel="noopener noreferrer" aria-label="Releases on GitHub (opens in a new tab)">Releases</a>
+      </nav>
+    </div>
+  </div>
+  <!-- /github-strip -->
+  <div class="sub-footer">
+    <div class="wrap">
+      <p>
+        © Lightmorphic Ltd. Registered in England and Wales, company number <a class="company-number" href="https://find-and-update.company-information.service.gov.uk/company/17423646">17423646</a>.<br />
+        Registered office: 82A James Carter Road, Mildenhall, IP28 7DE.<br />
+        Page last updated: <time id="last-updated" datetime="2026-10-17">17 October 2026</time>.
+      </p>
+      <nav aria-label="Legal">
+        <a href="/privacy">Privacy</a>
+        <a href="/cookies">Cookies</a>
+        <a href="/terms">Terms</a>
+        <a href="/accessibility">Accessibility</a>
+        <a href="/complaints">Complaints</a>
+      </nav>
+    </div>
+  </div>
+  </footer>
+
+  <script src="icons.js"></script>
+  <script src="https://apps.lightmorphic.com/launcher.js" defer></script>
+</body>
+</html>

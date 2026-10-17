@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Fetch Terminal</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self';" />
+<link rel="stylesheet" href="../node_modules/@xterm/xterm/css/xterm.css" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div id="titlebar">
+    <button id="sidebar-toggle" class="icon-btn titlebar-btn" data-icon="sidebar" data-tooltip="Toggle snippets sidebar (Ctrl+Shift+B)"></button>
+    <div id="sidebar-topbar">
+      <div class="search-field">
+        <span class="search-icon" data-icon="search"></span>
+        <input id="snippet-search" placeholder="Search snippets" autocomplete="off" />
+      </div>
+      <button id="add-snippet-btn" class="icon-btn" data-icon="plus" data-tooltip="New snippet"></button>
+      <button id="pin-btn" class="icon-btn accent-icon-btn" data-icon="unlock" data-tooltip="Keep sidebar open"></button>
+    </div>
+    <div id="terminal-topbar">
+      <div id="tabbar">
+        <div id="tabs"></div>
+        <button id="new-tab-btn" class="icon-btn" data-icon="plus" data-tooltip="New tab (Ctrl+Shift+T)"></button>
+      </div>
+      <div class="titlebar-drag spacer"></div>
+      <button id="clear-btn" class="icon-btn titlebar-btn filled-accent" data-icon="clear" data-tooltip="Clear terminal"></button>
+      <div class="titlebar-popover-anchor">
+        <button id="appearance-btn" class="icon-btn titlebar-btn filled-accent" data-icon="palette" data-tooltip="Appearance"></button>
+        <div id="appearance-popover" class="popover hidden">
+          <div class="popover-scrim"></div>
+          <div class="popover-panel">
+            <div class="popover-title">Accent color</div>
+            <div id="accent-swatches"></div>
+          </div>
+        </div>
+      </div>
+      <div class="titlebar-brand titlebar-drag"><span class="app-title">Fetch Terminal</span></div>
+      <div id="window-controls">
+        <button id="btn-min" class="win-btn" data-icon="minimize" data-tooltip="Minimize"></button>
+        <button id="btn-max" class="win-btn" data-icon="maximize" data-tooltip="Maximize"></button>
+        <button id="btn-close" class="win-btn win-btn-close" data-icon="closeWindow" data-tooltip="Close"></button>
+      </div>
+    </div>
+  </div>
+
+  <div id="main">
+    <aside id="sidebar">
+      <div id="snippet-list"></div>
+
+      <div id="credential-section">
+        <div class="credential-header-row">
+          <span class="section-title">Passwords</span>
+          <div id="credential-controls" class="credential-controls"></div>
+        </div>
+        <div id="credential-list"></div>
+      </div>
+
+      <div id="sidebar-footer">
+        <div class="footer-row">
+          <button id="import-btn" class="text-btn small neutral" data-icon-inline="import">Import</button>
+          <button id="export-btn" class="text-btn small neutral" data-icon-inline="export">Export</button>
+          <button id="reset-data-btn" class="text-btn small neutral reset-data-btn" data-tooltip="Delete all snippets, history, passwords, and settings">Reset</button>
+        </div>
+        <div id="app-brand">
+          <div class="app-brand-top">
+            <a id="app-brand-link" class="app-brand-link" href="https://fetchterminal.org" data-tooltip="fetchterminal.org">
+              <span id="app-brand-version" class="app-brand-version"></span>
+            </a>
+            <button id="update-dot" type="button" class="update-dot" data-tooltip="Checking for updates…">
+              <svg class="update-ring" viewBox="0 0 14 14" width="14" height="14" aria-hidden="true">
+                <circle class="update-ring-track" cx="7" cy="7" r="5.7"></circle>
+                <circle class="update-ring-progress" cx="7" cy="7" r="5.7"></circle>
+              </svg>
+            </button>
+          </div>
+          <a id="lightmorphic-credit" class="lightmorphic-credit" href="https://lightmorphic.com" data-tooltip="lightmorphic.com">
+            <span>Created by</span>
+            <img src="images/lightmorphic-dark-tb-250x50-sq.webp" alt="Lightmorphic" width="105" height="21" />
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <div id="terminals"></div>
+  </div>
+
+  <div id="history-modal" class="modal hidden">
+    <div class="modal-scrim"></div>
+    <div class="modal-card history-card">
+      <div class="search-field modal-search">
+        <span class="search-icon" data-icon="search"></span>
+        <input id="history-search" placeholder="Search command history" autocomplete="off" />
+      </div>
+      <div id="history-list"></div>
+    </div>
+  </div>
+
+  <div id="snippet-modal" class="modal hidden">
+    <div class="modal-scrim"></div>
+    <div class="modal-card">
+      <h3 id="snippet-modal-title">New snippet</h3>
+      <label class="field-label">Name <span class="hint">(optional — falls back to the command)</span>
+        <input id="snippet-name-input" placeholder="e.g. Deploy prod" autocomplete="off" />
+      </label>
+      <label class="field-label">Command
+        <textarea id="snippet-command-input" rows="3" placeholder="e.g. ssh user@example.com"></textarea>
+      </label>
+      <div class="modal-actions">
+        <button id="snippet-delete-btn" class="text-btn danger hidden">Delete</button>
+        <span class="spacer"></span>
+        <button id="snippet-cancel-btn" class="text-btn">Cancel</button>
+        <button id="snippet-save-btn" class="filled-btn">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="credential-modal" class="modal hidden">
+    <div class="modal-scrim"></div>
+    <div class="modal-card">
+      <h3 id="credential-modal-title">New password</h3>
+      <label class="field-label">Name
+        <input id="credential-name-input" placeholder="e.g. sudo, prod server" autocomplete="off" />
+      </label>
+      <label class="field-label" id="credential-password-label">Password
+        <input id="credential-password-input" type="password" autocomplete="new-password" />
+      </label>
+      <p class="modal-note">Stored encrypted using your OS's secure keyring. Once
+        saved, it can never be viewed or exported again through this app —
+        only used or deleted.</p>
+      <div class="modal-actions">
+        <button id="credential-delete-btn" class="text-btn danger hidden">Delete</button>
+        <span class="spacer"></span>
+        <button id="credential-cancel-btn" class="text-btn">Cancel</button>
+        <button id="credential-save-btn" class="filled-btn">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

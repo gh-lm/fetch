@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Documentation: Fetch Terminal</title>
+<meta name="description" content="How to install and use Fetch Terminal, from first start to the password vault." />
+<meta name="theme-color" content="#0b0b10" />
+<link rel="canonical" href="https://fetchterminal.org/docs" />
+<link rel="icon" type="image/png" href="favicon.png" />
+<link rel="preload" href="fonts/geist-sans/Geist-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="fonts/geist-sans/Geist-Regular.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/styles.css?v=583dda82" />
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap site-header-row">
+      <a class="wordmark" href="/" translate="no" style="text-decoration:none">Fetch&nbsp;Terminal</a>
+      <nav class="site-nav" aria-label="Page sections">
+        <a href="/#features">Features</a>
+        <a href="/#security">Security</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/#install">Install</a>
+        <div id="all-apps"></div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="legal">
+      <div class="wrap">
+        <h1>Documentation</h1>
+        <p class="lede">Everything about running Fetch Terminal.</p>
+        <div class="prose">
+<p>Fetch Terminal is a terminal emulator for the Linux desktop, built with Electron. It draws its own interface, so it needs neither GTK nor Qt and looks the same on every desktop.</p>
+<p>Choose it if you keep retyping the same commands. Save a command once in the sidebar and run it with a click, get your earlier commands offered as you type, and keep passwords in a vault that types them for you without ever showing them again.</p>
+<h2 id="how-it-works">How it works</h2>
+<h2 id="quick-start">Quick start</h2>
+<p>Download the newest AppImage from the releases page, then make it executable and run it:</p>
+<pre><code>chmod +x Fetch-Terminal-*.AppImage
+./Fetch-Terminal-*.AppImage</code></pre>
+<p>The first time it runs, it adds itself to your application menu, so you can pin it to your panel like any other app. It needs no FUSE library, so it also starts on systems that only have FUSE 3.</p>
+<h2 id="snippets">Snippets</h2>
+<p>A snippet is a saved shell command, including an SSH one-liner. Click one and it runs in the active tab. Hold Ctrl while you click to type it without pressing Enter, which suits a snippet that is only the start of a command.</p>
+<ul>
+<li>A search box at the top of the sidebar filters as you type.</li>
+<li>Pin up to three snippets to the top of the list.</li>
+<li>Drag to reorder.</li>
+<li>The sidebar stays open by default. Unlock it and it folds away as soon as you type into the terminal or run a snippet.</li>
+<li>Export your snippets to a Markdown file and import them again, to back them up or share them.</li>
+</ul>
+<h2 id="your-own-colours">Your own colours</h2>
+<p>The app is dark only. The palette button in the title bar opens fifteen accent colours. Pick one and the buttons, icons, active tab and selection re-colour at once, at full strength. The default is brand yellow.</p>
+<h2 id="the-password-vault">The password vault</h2>
+<p>Save a password once and click its row to type it into whatever is asking: <code>sudo</code>, an SSH login, anything. The app presses Enter for you.</p>
+<p>Passwords are write-only. Once saved, they can be used or deleted, but never shown, copied or exported. Two things protect them:</p>
+<ol>
+<li><strong>Encryption on disk.</strong> Passwords are encrypted with your system's own keyring (Secret Service, GNOME Keyring or KWallet). If no keyring is running, saving fails with a clear message instead of storing the password in plain text.</li>
+<li><strong>A vault PIN.</strong> The PIN gates every use of the vault and locks it again after five minutes unused. Five wrong guesses lock it for an hour, and restarting the app does not reset that.</li>
+</ol>
+<p>There is no way to recover a forgotten PIN. Reset all data is the way out, and it deletes the saved passwords too.</p>
+<h2 id="what-it-does">What it does</h2>
+<ul>
+<li>Tabs running your default shell, up to four at once</li>
+<li>Inline autocomplete from your earlier commands. Accept with Tab or the right arrow</li>
+<li>A command history search, <code>Ctrl+Shift+F</code>, shared across tabs</li>
+<li>Multi-line paste that reaches the shell as one block. Nothing runs until you press Enter, and password prompts still work</li>
+<li>Click anywhere on the current input line to move the cursor there</li>
+<li><code>Ctrl+Shift+C</code> and <code>Ctrl+Shift+V</code> to copy and paste, plus a right-click menu. Plain <code>Ctrl+C</code> and <code>Ctrl+V</code> keep their usual shell meaning</li>
+<li>Fifteen accent colours on a dark interface</li>
+<li>An update dot that checks hourly, and checks at once when you click it</li>
+<li>No accounts, no analytics, no telemetry</li>
+</ul>
+<h3 id="keyboard-shortcuts">Keyboard shortcuts</h3>
+<div class="table-wrap"><table><thead><tr><th>Shortcut</th><th>Action</th></tr></thead><tbody>
+<tr><td><code>Ctrl+Shift+T</code></td><td>New tab</td></tr>
+<tr><td><code>Ctrl+Shift+W</code></td><td>Close the active tab</td></tr>
+<tr><td><code>Ctrl+Tab</code>, <code>Ctrl+Shift+Tab</code></td><td>Next or previous tab</td></tr>
+<tr><td><code>Ctrl+Shift+F</code></td><td>Search command history</td></tr>
+<tr><td><code>Ctrl+Shift+B</code></td><td>Show or hide the sidebar</td></tr>
+<tr><td><code>Tab</code> or right arrow</td><td>Accept an autocomplete suggestion</td></tr>
+<tr><td><code>Ctrl+Shift+C</code>, <code>Ctrl+Shift+V</code></td><td>Copy and paste</td></tr>
+<tr><td><code>Esc</code></td><td>Close an open dialog</td></tr>
+</tbody></table></div>
+<h2 id="updates">Updates</h2>
+<p>The app asks GitHub for a newer release once when it starts and once an hour after that. A small dot beside the version number shows the result:</p>
+<div class="table-wrap"><table><thead><tr><th>Dot</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>Green</td><td>You are on the latest version. Click it to check now</td></tr>
+<tr><td>Amber</td><td>An update is available. Click it to download, and a line traces the edge as it goes</td></tr>
+<tr><td>Blue</td><td>The update is downloaded. Click it to restart into the new version</td></tr>
+<tr><td>Grey</td><td>A check is in progress</td></tr>
+<tr><td>Red</td><td>The last check could not reach GitHub</td></tr>
+</tbody></table></div>
+<p>Nothing downloads or installs unless you click. Updates only apply to the AppImage. Running from source with <code>npm start</code> skips the check.</p>
+<h2 id="settings">Settings</h2>
+<p>Everything is set inside the app. There are no config files to edit.</p>
+<div class="table-wrap"><table><thead><tr><th>Setting</th><th>Required</th><th>Default</th><th>What it does</th></tr></thead><tbody>
+<tr><td>Accent colour</td><td>No</td><td>Brand yellow</td><td>One of fifteen colours, from the palette button in the title bar</td></tr>
+<tr><td>Sidebar lock</td><td>No</td><td>Locked open</td><td>When unlocked, the sidebar folds away as you type</td></tr>
+<tr><td>Vault PIN</td><td>Only to use the vault</td><td>None</td><td>Set the first time you open the vault</td></tr>
+<tr><td>Reset all data</td><td>No</td><td>Not applicable</td><td>Deletes snippets, history, saved passwords and settings</td></tr>
+</tbody></table></div>
+<h2 id="where-your-data-lives">Where your data lives</h2>
+<p>Snippets, command history, your accent colour and the encrypted vault are JSON files in the app's folder under <code>~/.config/Fetch Terminal/</code>. Each one can be read by your user account only. Nothing is sent anywhere.</p>
+<p>To clear everything from inside the app, use <strong>Reset</strong> at the foot of the sidebar and then <strong>Confirm?</strong>. To remove it by hand, after deleting the AppImage:</p>
+<pre><code>rm -rf ~/.config/Fetch\ Terminal/
+rm -f ~/.local/share/applications/fetch-terminal.desktop
+rm -f ~/.local/share/icons/hicolor/512x512/apps/fetch-terminal.png</code></pre>
+<h2 id="security">Security</h2>
+<ul>
+<li>The window only ever loads its own bundled interface. No remote content, no CDN, no web fonts.</li>
+<li>The Content Security Policy allows only the app's own scripts.</li>
+<li>Only <code>http</code> and <code>https</code> links are ever handed to your desktop to open.</li>
+<li>The only network request the app makes by itself is the update check.</li>
+<li>Every data file is readable by your user only.</li>
+</ul>
+<p>The full policy, including how to report a problem privately, is in <a href="/security">SECURITY.md</a>.</p>
+<h2 id="building-it-yourself">Building it yourself</h2>
+<p>You need Node.js and a toolchain for native modules, because <code>node-pty</code> is compiled on install. On Debian and Ubuntu:</p>
+<pre><code>sudo apt install -y build-essential python3</code></pre>
+<p>Then, from a copy of this repository:</p>
+<pre><code>npm install
+npm start</code></pre>
+<p><code>npm run dist</code> builds <code>Fetch-Terminal-&lt;version&gt;.AppImage</code> and moves it into <code>~/Downloads</code>.</p>
+<h3 id="snippet-file-format">Snippet file format</h3>
+<p>Exported snippets are Markdown, so they are easy to read, edit and compare:</p>
+<pre><code># Fetch Terminal Snippets
+
+## Deploy site</code></pre>
+<p>ssh deploy@example.com "cd /srv/app &amp;&amp; ./deploy.sh"</p>
+<pre><code></code></pre>
+<p>ls -la</p>
+<pre><code></code></pre>
+<p>A <code>##</code> heading above a code block becomes the snippet's name. A bare code block is imported without a name and shows its command as the label.</p>
+<h2 id="licence">Licence</h2>
+<p>Fetch Terminal is copyright Lightmorphic Ltd and free software under the GNU General Public Licence, version 3 or later. The full text is in <a href="/licence">LICENSE</a>. Versions 1.8.0 and later are under the GPL. Earlier versions were released under the MIT licence. What changed in each version is in <a href="/changelog">CHANGELOG.md</a>.</p>
+<p>To report a problem or ask a question, see CONTRIBUTING.md.</p>
+<h2 id="disclaimer">Disclaimer</h2>
+<p>This software is provided as it is, without warranty of any kind, express or implied. The <a href="/licence">LICENSE</a> file has the exact terms. You use it at your own risk.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <nav class="wrap site-footer-nav" aria-label="Page sections, repeated">
+      <a href="/#features">Features</a>
+      <a href="/#security">Security</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/#install">Install</a>
+      <a href="/">Home</a>
+    </nav>
+    <div class="wrap site-footer-row">
+      <span translate="no">Fetch&nbsp;Terminal</span>
+      <span class="site-footer-sep" aria-hidden="true">·</span>
+      <a href="/source">Source</a>
+      <a class="site-footer-sponsor lightmorphic-badge" href="https://lightmorphic.com" target="_blank" rel="noopener noreferrer" translate="no">
+        <span>Created by</span>
+        <img src="images/lightmorphic-dark-tb-250x50-sq.webp" alt="Lightmorphic" width="125" height="25" loading="lazy" />
+        <span class="external-link-icon" data-icon="externalLink" aria-hidden="true"></span>
+      </a>
+    </div>
+  <!-- github-strip -->
+  <div class="oss-bar">
+    <div class="wrap oss-bar-row">
+      <div class="marks">
+        <a href="https://github.com/gh-lm/fetch" target="_blank" rel="noopener noreferrer" aria-label="Fetch Terminal on GitHub (opens in a new tab)">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        </a>
+        <a href="https://opensource.org" target="_blank" rel="noopener noreferrer" aria-label="Open Source Initiative (opens in a new tab)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="5" r="2.6"/><circle cx="5.2" cy="17" r="2.6"/><circle cx="18.8" cy="17" r="2.6"/>
+            <path d="M10.7 7.3 6.5 14.7M13.3 7.3l4.2 7.4M7.8 17h8.4"/>
+          </svg>
+        </a>
+      </div>
+      <nav aria-label="Source code">
+        <a href="https://github.com/gh-lm/fetch" target="_blank" rel="noopener noreferrer" aria-label="Repository on GitHub (opens in a new tab)">Repository</a>
+        <a href="https://github.com/gh-lm/fetch/blob/main/README.md" target="_blank" rel="noopener noreferrer" aria-label="Documentation on GitHub (opens in a new tab)">Documentation</a>
+        <a href="https://github.com/gh-lm/fetch/security/policy" target="_blank" rel="noopener noreferrer" aria-label="Security on GitHub (opens in a new tab)">Security</a>
+        <a href="https://github.com/gh-lm/fetch/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" aria-label="Licence on GitHub (opens in a new tab)">Licence</a>
+        <a href="https://github.com/gh-lm/fetch/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" aria-label="Changelog on GitHub (opens in a new tab)">Changelog</a>
+        <a href="https://github.com/gh-lm/fetch/issues" target="_blank" rel="noopener noreferrer" aria-label="Issues on GitHub (opens in a new tab)">Issues</a>
+        <a href="https://github.com/gh-lm/fetch/releases" target="_blank" rel="noopener noreferrer" aria-label="Releases on GitHub (opens in a new tab)">Releases</a>
+      </nav>
+    </div>
+  </div>
+  <!-- /github-strip -->
+  <div class="sub-footer">
+    <div class="wrap">
+      <p>
+        © Lightmorphic Ltd. Registered in England and Wales, company number <a class="company-number" href="https://find-and-update.company-information.service.gov.uk/company/17423646">17423646</a>.<br />
+        Registered office: 82A James Carter Road, Mildenhall, IP28 7DE.<br />
+        Page last updated: <time id="last-updated" datetime="2026-10-17">17 October 2026</time>.
+      </p>
+      <nav aria-label="Legal">
+        <a href="/privacy">Privacy</a>
+        <a href="/cookies">Cookies</a>
+        <a href="/terms">Terms</a>
+        <a href="/accessibility">Accessibility</a>
+        <a href="/complaints">Complaints</a>
+      </nav>
+    </div>
+  </div>
+  </footer>
+
+  <script src="icons.js"></script>
+  <script src="https://apps.lightmorphic.com/launcher.js" defer></script>
+</body>
+</html>
