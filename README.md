@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/gh-lm/fetch/releases"><img alt="Version 1.9.2" src="https://img.shields.io/badge/version-1.9.2-fbc711?style=flat-square&labelColor=1f2937"></a>
+  <a href="https://github.com/gh-lm/fetch/releases"><img alt="Version 1.0.0" src="https://img.shields.io/badge/version-1.0.0-fbc711?style=flat-square&labelColor=1f2937"></a>
   <a href="LICENSE"><img alt="Licence GPL-3.0-or-later" src="https://img.shields.io/badge/licence-GPL--3.0--or--later-3b82f6?style=flat-square&labelColor=1f2937"></a>
   <a href="https://github.com/gh-lm/fetch/releases/latest"><img alt="Published as an AppImage" src="https://img.shields.io/badge/published-AppImage-22c55e?style=flat-square&labelColor=1f2937"></a>
   <img alt="Telemetry: none" src="https://img.shields.io/badge/telemetry-none-a855f7?style=flat-square&labelColor=1f2937">
@@ -212,8 +212,8 @@ block is imported without a name and shows its command as the label.
 
 Fetch Terminal is copyright Lightmorphic Ltd and free software under the GNU
 General Public Licence, version 3 or later. The full text is in
-[LICENSE](LICENSE). Versions 1.8.0 and later are under the GPL. Earlier
-versions were released under the MIT licence. What changed in each version is
+[LICENSE](LICENSE). Every release from 1.0.0 is under the GPL. Releases made before the
+fresh version numbering, up to 1.7.1, were under the MIT licence. What changed in each version is
 in [CHANGELOG.md](CHANGELOG.md).
 
 To report a problem or ask a question, see [CONTRIBUTING.md](CONTRIBUTING.md).

@@ -5,17 +5,32 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
-## [1.9.2] - 2026-10-17
+## [1.1.0] - 2026-10-17
 
 ### Changed
 
-- Updates come from the project's GitHub releases again. The app checks
-  there once at startup and once an hour, as before, and the dot reads
-  "Can't connect to GitHub" when the check fails.
-- The website moves to Cloudflare Pages. The download button still points
-  at fetchterminal.org and is forwarded to the newest AppImage on GitHub.
-- The repository gets its README, security page, contributing page and
-  this changelog laid out for GitHub.
+- The website moves to Cloudflare Pages. The download button still points at
+  fetchterminal.org and is forwarded to the newest AppImage on GitHub.
+- The repository gets its README, security page, contributing page and this
+  changelog laid out for GitHub, and the website gains documentation,
+  changelog, security, licence and source pages built from them.
+
+## [1.0.0] - 2026-10-17
+
+The first release published on GitHub under a fresh version number. It is the
+same app as the earlier 1.9.1, renumbered. Anyone still running an earlier
+number needs to download it once by hand, because the updater would see 1.0.0
+as older.
+
+### Changed
+
+- Updates come from the project's GitHub releases. The app checks there once
+  at startup and once an hour, and the update dot reads "Can't connect to
+  GitHub" when a check fails.
+
+## Before the fresh numbering
+
+Everything below was released under the earlier numbers, up to 1.9.1.
 
 ## [1.9.1] - 2026-09-28
 
