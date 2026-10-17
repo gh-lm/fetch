@@ -752,7 +752,7 @@ h1 {
 
 /* ---------- GitHub strip: above the legal footer on every page ---------- */
 
-.oss-bar { border-top: 1px solid var(--outline-faint); padding-top: 22px; color: var(--ink-dim); font-size: 0.95rem; }
+.oss-bar { border-top: 1px solid var(--outline-faint); padding: 10px 0; color: var(--ink-dim); font-size: 0.95rem; }
 .oss-bar-row {
   display: flex;
   flex-wrap: wrap;
